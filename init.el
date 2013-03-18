@@ -1,4 +1,4 @@
-X(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 
 ;; Load package manager
@@ -13,5 +13,6 @@ X(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (add-to-list 'load-path "~/.emacs.d/elisp")
 (require 'fancyguy)
 
+(load "~/.emacs.d/conf/settings.el")
 (load "~/.emacs.d/conf/keybindings.el")
 (load "~/.emacs.d/conf/themes.el")
