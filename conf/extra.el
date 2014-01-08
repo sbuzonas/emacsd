@@ -125,9 +125,9 @@
     (load-file "~/.private.el"))
     (setq freenode-passwd "")
 
-  (setq circe-default-nick "vauban")
+  (setq circe-default-nick "slbmeh")
 
-  (setq circe-default-realname "vauban")
+  (setq circe-default-realname "slbmeh")
 
   (setq circe-highlight-nick-type 'all)
 
@@ -141,14 +141,8 @@
   (setq circe-server-auto-join-channels
         '(("^freenode$"
            "#emacs"
-           "#gnus"
-           "#latex"
-           "#ledger"
-           "#org-mode"
-           "#stumpwm"
            "#zsh"
-           "#erc"
-           "#xemacs")))
+           "##php")))
 
   (setq circe-nickserv-passwords
         `(("freenode" ,freenode-passwd)))
@@ -160,7 +154,7 @@
   (setq lui-max-buffer-size 30000)
 
   ;; (setq lui-fill-column 80)
-  (setq lui-highlight-keywords '("[^<]vauban" "org" "beamer" "tikz"))
+  (setq lui-highlight-keywords '("[^<]slbmeh" "org" "beamer" "tikz"))
 
   (eval-after-load "circe"
     '(progn
@@ -184,19 +178,7 @@
   ;; /leave
   )
 
-
-
-(when (require 'emms-setup nil t)
-  (require 'emms-player-simple)
-  (require 'emms-source-file)
-  (require 'emms-source-playlist)
-  (emms-standard)
-  (emms-default-players)
-  (defalias 'np 'emms-show))
-;; and it works ok,  I've got mplayer in the PATH.
-
-
-(when (try-require 'ido-XXX)
+(when (try-require 'ido)
   (ido-mode 1)
 
   (ido-everywhere 1)
@@ -208,19 +190,10 @@
 
   (setq org-completion-use-ido t))
 
-
 ;; SQL-mode
 (setq sql-sqlite-program "sqlite3")
 
-
 (try-require 'ess-site)
-
-
-
-;; Google maps
-(try-idle-require 'google-maps-XXX)
-
-
 
 ;; make Emacs aware of this package
 (when (try-require 'command-frequency)

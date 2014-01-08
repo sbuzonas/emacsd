@@ -213,4 +213,6 @@
 ;; and to light background after sunrise.
 ;; See www.jurta.org/emacs/dotemacs.en.html
 
+(load-theme 'tango-2 t)
+
 (message "XX Emacs Display..."))

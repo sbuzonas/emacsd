@@ -1,5 +1,9 @@
 (require 'package)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(when (< emacs-major-version 24)
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+
 (package-initialize)
 
 (when (not package-archive-contents)
@@ -7,31 +11,40 @@
 
 ;; My Packages
 (defvar my-packages
-  '(clojure-mode
-    clojurescript-mode
-    find-file-in-git-repo
-    gist
+  '(smex
+    idle-require
+    unbound
+    browse-kill-ring
+    bm
+    pager
+    highlight
+    highlight-symbol
+    column-marker
+    speedbar
+    sr-speedbar
+    pp-c-l
+    csv-mode
+    outline-magic
+    fold-dwim
+    boxquote
+    pabbrev
+    company
     magit
-    nrepl
-    paredit
-    rainbow-mode
-    smex
-    smooth-scroll
-    solarized-theme
-    starter-kit
-    starter-kit-bindings
-    starter-kit-eshell
-    starter-kit-js
-    starter-kit-lisp
-    tango-2-theme
+    etags-select
+    yasnippet
+    dired+
+    dired-single
+    multi-term
     tidy
-    undo-tree
-    virtualenv
-    wget
-    yaml-mode
+    htmlize
+    find-file-in-git-repo
+    rainbow-mode
+    ruby-mode
+    tango-2-theme
+    solarized-theme
     zenburn-theme)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
-  (when (not (package-installed-p p))
-    (package-install p)))
+(when (not (package-installed-p p))
+  (package-install p)))

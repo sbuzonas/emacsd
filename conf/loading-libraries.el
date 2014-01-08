@@ -124,7 +124,7 @@ Internet) reside.")
 ;; your Linux distro) without impacting on stuff you have added by hand.
 
 ;; 3.
-(defvar my-site-lisp-directory "~/.emacs.d/elisp/"
+(defvar my-site-lisp-directory "~/.emacs.d/elpa/"
   "Name of directory where my personal additional Emacs Lisp files reside.")
 
 (fni/add-to-load-path my-site-lisp-directory

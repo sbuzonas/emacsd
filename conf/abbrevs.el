@@ -49,22 +49,34 @@
 (GNUEmacs
     (when (try-require 'yasnippet) ;; not yasnippet-bundle
 
-      ;; do necessary initialization
-      (yas/initialize)
+      (yas-global-mode 1)
 
-      ;; root directory that stores the snippets for each major mode
-      (setq yas/root-directory
-            (concat my-site-lisp-directory "yasnippet/snippets"))
-      (unless (file-directory-p yas/root-directory)
-        (setq yas/root-directory
-              (concat local-site-lisp-directory "yasnippet/snippets")))
+      (defun yas-ido-expand ()
+        "Lets you select (and expand) a yasnippet key"
+        (interactive)
+          (let ((orpginal-point (point)))
+            (while (and
+                    (not (= (point) (point-min) ))
+                    (not
+                     (string-match "[[:space:]\n]" (char-to-string
+                                                    (char-before)))))
+              (backward-word 1))
+          (let* ((init-word (point))
+                 (word (buffer-substring init-word original-point))
+                 (list (yas-active-keys)))
+            (goto-char original-point)
+            (let ((key (remove-if-not
+                        (lambda (s) (string-match (concat "^" word) s))
+                        list)))
+              (if (= (length key) 1)
+                  (setq key (pop key))
+                (setq key (ido-completing-read "key: " list nil nil word)))
+              (delete-char (- init-word original-point))
+              (insert key)
+              (yas-expand)))))
 
-      ;; load snippet definition from a (existing) directory hierarchy
-      (when (file-directory-p yas/root-directory)
-          (yas/load-directory yas/root-directory))
+      (define-key yas-minor-mode-map (kbd "<C-tab>") 'yas-ido-expand)
 
-      ;; ;; the key to bind as a trigger of snippet
-      ;; (setq yas/trigger-key (kbd "SPC"))  ; default is TAB
 ))
 
 ;; For simple expansions, I prefer abbrev. Think: pub -> public, pro ->

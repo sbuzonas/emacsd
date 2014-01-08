@@ -86,30 +86,4 @@
        (t
         (set-selection-coding-system 'utf-8))))
 
-
-;;*** 26.17 (info "(emacs)Undisplayable Characters")
-
-(GNUEmacs
-    ;; display page delimiter character `^L' as an horizontal line
-    (when (try-require 'pp-c-l)
-
-        ;; function to produce string displayed in place of each Control-l char
-        (setq pp^L-^L-string-function
-              (lambda nil
-                (make-string (1- (window-width)) (string-to-char " "))))
-
-        ;; string displayed just before `pp^L-^L-string'
-        (setq pp^L-^L-string-pre "")
-
-        ;; turn on pretty display of `^L'
-        (pretty-control-l-mode 1)
-
-        ;; normal hook run to initialize window system display
-        (add-hook 'window-setup-hook
-                  'refresh-pretty-control-l)
-
-        ;; functions to call when window configuration changes
-        (add-hook 'window-configuration-change-hook
-                  'refresh-pretty-control-l)))
-
 (message "26 International Character Set Support... Done"))

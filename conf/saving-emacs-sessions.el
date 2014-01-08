@@ -10,7 +10,7 @@
     (setq-default save-place t)  ;; default value for all buffers
 
     ;; name of the file that records `save-place-alist' value
-    (setq save-place-file (convert-standard-filename "~/.emacs.d/places.txt"))
+    (setq save-place-file (convert-standard-filename "~/.emacs.d/places"))
 
     ;; do not make backups of master save-place file
     (setq save-place-version-control "never")))

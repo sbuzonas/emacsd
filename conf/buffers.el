@@ -92,13 +92,6 @@
 ;; put the current buffer at the end of the list of all buffers
 (global-set-key (kbd "<f12>") 'bury-buffer)
 
-
-
-
-
-
-
-
 ;; ;; Like standard Emacs 22 commands (bound to C-x left/right)
 ;; (define-key global-map [f11] 'previous-buffer) ;; my-buffer-prev
 ;; (define-key global-map [f12] 'next-buffer)     ;; my-buffer-next
@@ -108,22 +101,6 @@
 ;; (define-key global-map [(control f12)] 'next-error)
 ;; (define-key global-map [(control shift f11)] 'compilation-previous-file)
 ;; (define-key global-map [(control shift f12)] 'compilation-next-file)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ;;*** 23.4 (info "(emacs)Kill Buffer")
 
@@ -139,7 +116,7 @@
 ;;;       ))
 
 ;; key binding
-(global-set-key (kbd "<S-f12>") 'my-kill-this-buffer)
+(global-set-key (kbd "C-x C-k") 'my-kill-this-buffer)
 
 
 ;;*** 23.7 (info "(emacs)Buffer Convenience") and Customization of Buffer Handling
@@ -173,7 +150,6 @@
 
 ;; cycle through all windows on current frame
 (global-set-key (kbd "<f6>") 'other-window)
-
 
 ;;*** 24.6 Deleting and (info "(emacs)Change Window")
 
