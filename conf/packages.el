@@ -40,6 +40,12 @@
     find-file-in-git-repo
     rainbow-mode
     ruby-mode
+    guru-mode
+    gitignore-mode
+    php-mode
+    ssh-config-mode
+    syslog-mode
+    apache-mode
     tango-2-theme
     solarized-theme
     zenburn-theme)
