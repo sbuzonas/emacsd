@@ -26,6 +26,7 @@
     loading-libraries
     packages
     mouse
+    hooks
     debugging
     screen
     basic
