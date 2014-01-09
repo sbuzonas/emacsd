@@ -25,6 +25,7 @@
   '(environment
     loading-libraries
     packages
+    mouse
     debugging
     screen
     basic
