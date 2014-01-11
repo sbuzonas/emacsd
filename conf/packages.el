@@ -19,7 +19,6 @@
     pager
     highlight
     highlight-symbol
-    column-marker
     speedbar
     sr-speedbar
     pp-c-l
