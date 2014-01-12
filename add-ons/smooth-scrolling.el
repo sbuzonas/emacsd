@@ -6,5 +6,5 @@
 
 (when addon-smooth-scrolling
   (progn
-    (add-to-list my-default-packages 'smooth-scrolling)
+    (add-to-list 'my-default-packages 'smooth-scrolling)
     (with-library 'smooth-scrolling nil)))

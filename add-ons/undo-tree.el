@@ -6,7 +6,7 @@
 
 (when addon-undo-tree
   (progn
-    (add-to-list my-default-packages 'undo-tree)
+    (add-to-list 'my-default-packages 'undo-tree)
     (with-library 'undo-tree
       (after 'undo-tree
         (global-undo-tree-mode t)
