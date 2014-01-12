@@ -15,9 +15,7 @@
 
 ;; My Default Packages
 (defvar my-default-packages
-  '(undo-tree
-    smooth-scrolling
-    smex
+  '(smex
     zenburn-theme)
   "A list of packages to ensure are installed at launch.")
 

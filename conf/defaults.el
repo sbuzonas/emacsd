@@ -76,6 +76,7 @@
 (setq-default truncate-lines t)
 
 ;; Keep cursor away from edges when scrolling up/down
+(require-package 'smooth-scrolling)
 (require 'smooth-scrolling)
 
 ;; Allow recursive minibuffers
@@ -92,6 +93,7 @@
 
 ;; Represent undo-history as an actual tree (visualize wiht C-x u)
 (setq undo-tree-mode-lighter "")
+(require-package 'undo-tree)
 (require 'undo-tree)
 (global-undo-tree-mode)
 
