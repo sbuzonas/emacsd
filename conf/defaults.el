@@ -75,10 +75,6 @@
 ;; Don't break lines for me
 (setq-default truncate-lines t)
 
-;; Keep cursor away from edges when scrolling up/down
-(require-package 'smooth-scrolling)
-(require 'smooth-scrolling)
-
 ;; Allow recursive minibuffers
 (setq enable-recursive-minibuffers t)
 
@@ -90,12 +86,6 @@
 
 ;; Fontigy org-mode code blocks
 (setq org-src-fontify-natively t)
-
-;; Represent undo-history as an actual tree (visualize wiht C-x u)
-(setq undo-tree-mode-lighter "")
-(require-package 'undo-tree)
-(require 'undo-tree)
-(global-undo-tree-mode)
 
 ;; Sentences do not need double spaces to end.
 (set-default 'sentence-end-double-space nil)
