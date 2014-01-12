@@ -1,5 +1,3 @@
-(when section-environment (message "0 Environment...")
-
 (defmacro GNULinux (&rest body)
   (list 'if (string-match "linux" (prin1-to-string system-type))
         (cons 'progn body)))
@@ -18,4 +16,4 @@
       window-system
       (when (boundp 'aquamacs-version) aquamacs-version))
 
-(message "0 Environment... Done"))
+(provide 'environment)
