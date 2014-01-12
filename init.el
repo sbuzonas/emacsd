@@ -50,6 +50,10 @@
   (require-package 'exec-path-from-shell)
   (exec-path-from-shell-initialize))
 
+(defgroup features nil
+  "Group of features allowing to toggle their configuration"
+  :group 'emacs)
+
 (load-directory (expand-file-name "add-ons" user-emacs-directory))
 
 (message "* --[ Installing defined packages ]--")

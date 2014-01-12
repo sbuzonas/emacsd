@@ -1,7 +1,7 @@
 (defcustom addon-undo-tree
   nil
   "Enable undo-tree features"
-  :type '(bool)
+  :type 'boolean
   :group 'features)
 
 (when addon-undo-tree

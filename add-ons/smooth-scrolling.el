@@ -1,7 +1,7 @@
 (defcustom addon-smooth-scrolling
   nil
   "Enable smooth-scrolling features"
-  :type '(bool)
+  :type 'boolean
   :group 'features)
 
 (when addon-smooth-scrolling
