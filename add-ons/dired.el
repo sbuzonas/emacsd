@@ -16,12 +16,12 @@
 
   ;; Reload dired after making changes
   (dolist (a '(dired-do-rename
-            dired-do-copy
-            dired-create-directory
-            wdired-abort-changes))
-          (eval `(defadvice ,a (after revert-buffer activate)
-                   (revert-buffer))))
-
+               dired-do-copy
+               dired-create-directory
+               wdired-abort-changes))
+    (eval `(defadvice ,a (after revert-buffer activate)
+             (revert-buffer))))
+  
   ;; C-a is nicer in dired if it moves back to the start of files
   (defun dired-back-to-start-of-files ()
     (interactive)
@@ -50,7 +50,7 @@
 
   ;; Delete with C-x C-k to match file buffers and magit
   (define-key dired-mode-map (kbd "C-x C-k") 'dired-do-delete)
-
+  
   (eval-after-load "wdired"
     '(progn
        (define-key wdired-mode-map (kbd "C-a") 'dired-back-to-start-of-files)
