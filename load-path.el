@@ -51,12 +51,16 @@ Do it recursively if the third argument is not nil."
            nil)))
 (put 'with-library 'list-indent-function 1)
 
+(defgroup libraries nil
+  "Settings changing load paths"
+  :group 'emacs)
+
 (defcustom distro-site-lisp-directory
   (concat (or (getenv "SHARE")
                "/usr/share") "/emacs/site-lisp/")
   "Path to distro emacs lisp files"
-  :type '(string)
-  :group 'init)
+  :type 'string
+  :group 'libraries)
 (slbmeh/add-to-load-path distro-site-lisp-directory
                          'with-subdirs)
 
@@ -64,16 +68,16 @@ Do it recursively if the third argument is not nil."
   (concat (or (getenv "LOCAL_SHARE")
               "/usr/local/share") "/emacs/site-lisp/")
   "Path to site emacs lisp files"
-  :type '(string)
-  :group 'init)
+  :type 'string
+  :group 'libraries)
 (slbmeh/add-to-load-path local-site-lisp-directory
                          'with-subdirs)
 
 (defcustom user-lisp-directory
-  (expand-file-name "site-lisp" user-emacs-directory)
+  (expand-file-name "site-lisp/" user-emacs-directory)
   "Path to user emacs lisp files"
-  :type '(string)
-  :group 'init)
+  :type 'string
+  :group 'libraries)
 (slbmeh/add-to-load-path user-lisp-directory
                          'with-subdirs)
 
