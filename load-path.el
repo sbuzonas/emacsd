@@ -1,6 +1,6 @@
 ;; Set path to configuration
 (setq config-dir
-      (expand-file-name "conf" user-emacs-directory))
+      (expand-file-name "conf/" user-emacs-directory))
 
 (defadvice load (before debug-log activate)
   (message "Loading %s..." (locate-library (ad-get-arg 0))))
@@ -83,8 +83,7 @@ Do it recursively if the third argument is not nil."
 
 (defun load-config (config-name)
   "Loads a configuration file located in .emacs.d/conf/CONFIG-NAME.el"
-  (let ((file-relative-path (concat "conf/" config-name ".el")))
-    (load (fullpath-relative-to-current-file file-relative-path))))
+  (load (concat config-dir (symbol-name config-name) ".el")))
 
 (defmacro with-library (symbol &rest body)
   `(condition-case nil
