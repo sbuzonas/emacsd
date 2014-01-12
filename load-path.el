@@ -102,13 +102,31 @@ Do it recursively if the third argument is not nil."
   "Loads a configuration file located in .emacs.d/conf/CONFIG-NAME.el"
   (load (concat config-dir (symbol-name config-name) ".el")))
 
+(defun try-require (library)
+  "Attempt to load a library or module. Return true if the
+library given as argument is successfully loaded. If not, instead
+of an error, just add the package to a list of missing packages."
+  (condition-case err
+    (progn
+      (message "Checking for library `%s'..." library)
+      (if (stringp library)
+          (load-library library)
+        (require library))
+      (message "Found library `%s'." library))
+    (file-error
+      (progn
+        (message "Failed to locate library `%s'!" library)
+        (add-to-list 'missing-packages-list library 'append))
+      nil)))
+(put 'try-require 'lisp-indent-function 1)
+
 (defmacro with-library (symbol &rest body)
   `(condition-case nil
        (progn
-         (require ',symbol)
+         (try-require ',symbol)
          ,@body)
 
-     (error (message (format "Missing library '%s'." ',symbol))
+     (error (message (format "Missing library '%s'. Skipping execution of additional code." ',symbol))
             nil)))
 (put 'with-library 'lisp-indent-function 1)
 
