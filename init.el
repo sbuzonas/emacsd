@@ -55,3 +55,7 @@
 (message "* --[ Emacs initialization complete ]--"
 (if missing-packages-list
     (progn (message "Packages not found: %S" missing-packages-list)))
+
+(message "Emacs startup time: %d seconds."
+         (time-to-seconds (time-since emacs-load-start-time)))
+(sit-for 1)
