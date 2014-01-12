@@ -4,6 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(addon-dired t)
+ '(addon-grep t)
  '(addon-guide-key t)
  '(addon-ido t)
  '(addon-magit t)
