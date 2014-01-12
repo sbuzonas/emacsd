@@ -50,6 +50,8 @@
   (require-package 'exec-path-from-shell)
   (exec-path-from-shell-initialize))
 
+(load-directory (expand-file-name "add-ons" user-emacs-directory))
+
 (message "* --[ Installing defined packages ]--")
 ;; Install all of our default packages
 (condition-case nil
