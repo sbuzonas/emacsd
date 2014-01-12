@@ -6,6 +6,7 @@
  '(addon-dired t)
  '(addon-guide-key t)
  '(addon-ido t)
+ '(addon-magit t)
  '(addon-org t)
  '(addon-smooth-scrolling t)
  '(addon-undo-tree t)
