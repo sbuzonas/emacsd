@@ -14,6 +14,43 @@
   (when (file-directory-p path)
     (add-tol-list 'custom-theme-load-path path)))
 
+;; Initialize dark theme
+(require-package 'tango-2-theme)
+(setq dark-theme 'tango-2)
+
+;; Initialize light theme
+(require-package 'solarized-theme)
+(setq light-theme 'solarized-light)
+
+;; Dark theme
+(defun use-dark-theme ()
+  (interactive)
+  (disable-theme light-theme)
+  (load-theme dark-theme)
+  (setq current-theme dark-theme)
+  (when (boundp 'slbmeh/dark-font)
+    (set-face-attribute 'default nil :font slbmeh/dark-font)))
+
+;; Light theme
+(defun use-light-theme ()
+  (interactive)
+  (disable-theme dark-theme)
+  (load-theme light-theme)
+  (setq current-theme light-theme)
+  (when (boundp 'slbmeh/light-font)
+    (set-face-attribute 'default nil :font slbmeh/light-font)))
+
+;; Toggle themes
+(defun swap-theme-contrast ()
+  (interactive)
+  (if (string= current-theme dark-theme)
+      (use-light-theme)
+    (use-dark-theme)))
+
+(global-set-key (kbd "<f9>") 'swap-theme-contrast)
+
+(use-dark-theme)
+
 ;; Don't defer screen updates when performing operations
 (setq redisplay-dont-pause t)
 
