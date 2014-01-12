@@ -81,6 +81,19 @@ Do it recursively if the third argument is not nil."
   "Returns the full path of FILE-RELATIVE-PATH, relative to file location where this function is called."
   (concat (file-name-directory (or load-file-name buffer-file-name)) file-relative-path))
 
+(defun load-directory (directory)
+  "Load all `.el' files in DIRECTORY."
+  (dolist (element (directory-files-and-attributes directory nil nil nil))
+    (let* ((path (car element))
+           (fullpath (concat directory "/" path))
+           (isdir (car (cdr element)))
+           (ignore-dir (or (string= path ".") (string= path ".."))))
+      (cond
+       ((and (eq isdir t) (not ignore-dir))
+        (load-directory fullpath))
+       ((and (eq isdir nil) (string= (substring path -3) ".el"))
+        (load (file-name-sans-extension fullpath)))))))
+
 (defun load-config (config-name)
   "Loads a configuration file located in .emacs.d/conf/CONFIG-NAME.el"
   (load (concat config-dir (symbol-name config-name) ".el")))
