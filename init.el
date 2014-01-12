@@ -17,6 +17,7 @@
 (require 'load-path)
 
 ;; Keep emacs Custom-settings in separate file
+(message "* --[ Loading settings set by Custom ]--")
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
@@ -40,6 +41,17 @@
 (load-config 'packages)
 
 ;; Require appearance early, but package configuration is needed
+(message "* --[ Loading appearance settings ]--")
 (require 'appearance)
 
-(packages-install)
+(message "* --[ Installing defined packages ]--")
+;; Install all of our default packages
+(condition-case nil
+    (packages-install)
+  (error
+    (package-refresh-contents)
+    (packages-install)))
+
+(message "* --[ Emacs initialization complete ]--"
+(if missing-packages-list
+    (progn (message "Packages not found: %S" missing-packages-list)))
