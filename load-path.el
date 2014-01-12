@@ -95,4 +95,10 @@ Do it recursively if the third argument is not nil."
             nil)))
 (put 'with-library 'lisp-indent-function 1)
 
+(defmacro after (mode &rest body)
+  "`eval-after-load' MODE evaluate BODY."
+  (declare (indent defun))
+  `(eval-after-load ,mode
+    '(progn ,@body)))
+
 (provide 'load-path)
