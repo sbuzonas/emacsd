@@ -15,9 +15,9 @@
 
 ;; My Default Packages
 (defvar my-default-packages
-  '(smex
-    tango-2-theme
-    solarized-theme
+  '(undo-tree
+    smooth-scrolling
+    smex
     zenburn-theme)
   "A list of packages to ensure are installed at launch.")
 
