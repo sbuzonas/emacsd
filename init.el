@@ -48,11 +48,14 @@
 ;; Install all of our default packages
 (condition-case nil
     (packages-install)
-  (error
-    (package-refresh-contents)
-    (packages-install)))
 
-(message "* --[ Emacs initialization complete ]--"
+  (error
+    (progn
+      (message "Error installing packages, attempting to refresh list.")
+      (package-refresh-contents)
+      (packages-install))))
+
+(message "* --[ Emacs initialization complete ]--")
 (if missing-packages-list
     (progn (message "Packages not found: %S" missing-packages-list)))
 
