@@ -1,4 +1,5 @@
 (require 'package)
+(setq package-enable-at-startup nil)
 
 ;; Add mepla to package repos
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
