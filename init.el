@@ -44,6 +44,12 @@
 (message "* --[ Loading appearance settings ]--")
 (require 'appearance)
 
+(load-config 'defaults)
+
+(MacOSX
+  (require-package 'exec-path-from-shell)
+  (exec-path-from-shell-initialize))
+
 (message "* --[ Installing defined packages ]--")
 ;; Install all of our default packages
 (condition-case nil
