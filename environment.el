@@ -1,9 +1,12 @@
+(defconst *is-mac* (string-match "darwin" (prin1-to-string system-type)))
+(defconst *is-linux* (string-match "linux" (prin1-to-string system-type)))
+
 (defmacro GNULinux (&rest body)
-  (list 'if (string-match "linux" (prin1-to-string system-type))
+  (list 'if *is-linux*
         (cons 'progn body)))
 
 (defmacro MacOSX (&rest body)
-  (list 'if (string-match "darwin" (prin1-to-string system-type))
+  (list 'if *is-mac*
         (cons 'progn body)))
 
 (defmacro TMUX (&rest body)
