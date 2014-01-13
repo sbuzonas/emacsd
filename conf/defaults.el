@@ -111,3 +111,6 @@
       ad-do-it)
     (dotimes (i 10)
       (when (= p (point)) ad-do-it))))
+
+;; don't add newlines to end of buffer when scrolling
+(setq next-line-add-newlines nil)
