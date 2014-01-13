@@ -53,6 +53,31 @@
 (TMUX
  (require 'vagrant))
 
+;; Make C-a jump between start of line and start of indentation
+(defun back-to-indentation-or-beginning ()
+  (interactive)
+  (if (= (point) (save-excursion (back-to-indentation) (point)))
+      (beginning-of-line)
+    (back-to-indentation)))
+
+(global-set-key (kbd "C-a") 'back-to-indentation-or-beginning)
+
+;; Replace comment-dwim with ability to toggle comment on region
+(defun region-active-p () (and transient-mark-mode mark-active))
+(defun comment-dwim-line (&optional arg)
+  "Replacement for the comment-dwim command.
+If no region is selected and current line is not blank and we are not at the end of the line,
+then comment the current line.
+Replaced default behaviour of comment-dwim, when it inserts comment at the end of the line."
+  (interactive "*P")
+  (comment-normalize-vars)
+  (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
+      (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+    (comment-dwim arg))
+  (next-line)
+  (back-to-indentation-or-beginning))
+(global-set-key (kbd "M-;") 'comment-dwim-line)
+
 ;; Define the features group for Custom to allow addons to show their states
 (defgroup features nil
   "Group of features allowing to toggle their configuration"
