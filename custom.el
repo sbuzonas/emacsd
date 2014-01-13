@@ -6,6 +6,7 @@
  '(addon-dired t)
  '(addon-grep t)
  '(addon-guide-key t)
+ '(addon-guru-mode t)
  '(addon-ido t)
  '(addon-magit t)
  '(addon-org t)
