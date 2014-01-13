@@ -46,6 +46,8 @@
 
 (load-config 'defaults)
 
+(load-config 'keybindings)
+
 (MacOSX
   (require-package 'exec-path-from-shell)
   (exec-path-from-shell-initialize))
