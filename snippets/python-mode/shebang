@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: shebang
+# key: shebang
+# contributer: Steve Buzonas <steve@fancyguy.com>
+# --
+#!/usr/bin/env python
+$0
