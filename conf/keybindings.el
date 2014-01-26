@@ -32,3 +32,23 @@
 
 (global-set-key (kbd "M-p") 'move-line-up)
 (global-set-key (kbd "M-n") 'move-line-down)
+
+;; Use shell-like backspace C-h, rebind help to F1
+(define-key key-translation-map [?\C-h] [?\C-?])
+(global-set-key (kbd "<f1>") 'help-command)
+
+(global-set-key (kbd "M-h") 'kill-region-or-backward-word)
+
+;; Transpose stuff with M-t
+(global-unset-key (kbd "M-t")) ;; which use to be transpose-words
+(global-set-key (kbd "M-t l") 'transpose-lines)
+(global-set-key (kbd "M-t w") 'transpose-words)
+(global-set-key (kbd "M-t s") 'transpose-sexps)
+(global-set-key (kbd "M-t p") 'transpose-params)
+
+;; Change next underscore with a camel case
+;; (global-set-key (kbd "C-c C--") 'replace-next-underscore-with-camel)
+;; (global-set-key (kbd "M-s M--") 'snakeify-current-word)
+
+;; Toggle quotes
+(global-set-key (kbd "C-'") 'toggle-quotes)
