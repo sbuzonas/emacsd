@@ -13,6 +13,7 @@
  '(addon-ido t)
  '(addon-magit t)
  '(addon-org t)
+ '(addon-server t)
  '(addon-shell t)
  '(addon-smex t)
  '(addon-smooth-scrolling t)
