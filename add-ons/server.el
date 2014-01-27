@@ -6,12 +6,11 @@
 
 (when addon-server
   (progn
+    (unless (server-running-p) (server-start))
     (add-hook 'server-switch-hook
-              (lambda nil
-                (let ((server-buf (current-buffer)))
-                  (bury-buffer)
-                  (switch-to-buffer-other-frame server-buf))))
-    (custom-set-variables '(server-kill-new-buffers t))
-    (add-hook 'server-done-hook
               (lambda ()
-                (delete-frame)))))
+                (when (current-local-map)
+                  (use-local-map (copy-keymap (current-local-map))))
+                (when server-buffer-clients
+                  (local-set-key (kbd "C-x k") 'server-edit))))
+    (custom-set-variables '(server-kill-new-buffers t))))
