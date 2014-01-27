@@ -6,6 +6,7 @@
  '(addon-circe t)
  '(addon-dired t)
  '(addon-grep t)
+ '(addon-gtags t)
  '(addon-guide-key t)
  '(addon-guru-mode t)
  '(addon-ido t)
