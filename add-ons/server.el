@@ -14,4 +14,5 @@
                   (use-local-map (copy-keymap (current-local-map))))
                 (when server-buffer-clients
                   (local-set-key (kbd "C-x k") 'server-edit))))
-    (custom-set-variables '(server-kill-new-buffers t))))
+    (custom-set-variables '(server-kill-new-buffers t))
+    (setq server-visit-hook (quote (save-place-find-file-hook)))))
