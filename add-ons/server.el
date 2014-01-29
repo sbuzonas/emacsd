@@ -6,6 +6,7 @@
 
 (when addon-server
   (progn
+    (require 'server)
     (unless (server-running-p) (server-start))
     (add-hook 'server-switch-hook
               (lambda ()
