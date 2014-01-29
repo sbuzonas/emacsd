@@ -5,6 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(Man-notify-method (quote bully))
  '(addon-circe t)
+ '(addon-clean-modes t)
  '(addon-dired t)
  '(addon-grep t)
  '(addon-gtags t)
