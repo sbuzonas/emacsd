@@ -20,8 +20,6 @@
   (when (file-directory-p path)
     (add-tol-list 'custom-theme-load-path path)))
 
-
-
 ;; Initialize dark theme
 (require-package 'tango-2-theme)
 (setq dark-theme 'tango-2)
@@ -79,6 +77,13 @@
 
 ;; Don't defer screen updates when performing operations
 (setq redisplay-dont-pause t)
+
+;; provide pretty lambda replacement
+(font-lock-add-keywords 'emacs-lisp-mode
+  '(("(\\(lambda\\)\\>" (0 (prog1 ()
+			     (compose-region (match-beginning 1)
+					     (match-end 1)
+					     ?λ))))))
 
 ;; org-mode colors
 (setq org-todo-keyword-faces
