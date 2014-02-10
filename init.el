@@ -48,6 +48,8 @@
 
 (load-config 'keybindings)
 
+(load-config 'mouse)
+
 (load-config 'latex)
 
 (MacOSX
