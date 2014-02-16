@@ -28,7 +28,11 @@
   (setq org-default-notes-file (concat org-directory "/notes.org"))
   (setq org-capture-templates
         '(("t" "Todo" entry (file+headline (concat org-directory "/gtd.org") "Tasks")
-           "* TODO %?\n %i\n")
+           "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
+          ("n" "Note" entry (file (concat org-directory "/gtd.org"))
+           "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
+          ("j" "Journal" entry (file+datetree (concat org-directory "/diary.org"))
+           "* %?\n%U\n" :clock-in t :clock-resume t)
           ("l" "Link" plain (file (concat org-directory "/links.org"))
            "- %?\n %x\n")))
 
@@ -206,5 +210,17 @@ return the result as a hex value."
     (when otc (org-table-toggle-coordinate-overlays))
     (message "%d element sorted in column %d" (length lns) column)))
 
-  ;; TODO: figure out why modifiers are not recognized with function keys on Mac
-  (define-key global-map (kbd "C-c r") 'org-capture))
+  ;; Open up agenda
+  (global-set-key (kbd "<f2>") 'org-agenda)
+  ;; Switch org buffer
+  (global-set-key (kbd "C-c b") 'org-iswitchb)
+  ;; Go to currently clocked item
+  (global-set-key (kbd "<f3>") )
+  ;; Capture a task
+  (global-set-key (kbd "C-c c") 'org-capture)
+  ;; 
+
+  (global-set-key "\C-cr" 'org-capture)
+  (global-set-key "\C-cl" 'org-store-link)
+  (global-set-key "\C-ca" 'org-agenda)
+  (global-set-key "\C-cb" 'org-iswitchb))
