@@ -16,4 +16,16 @@
   (setq tmux-pane-number z)
   (message "Tmux Setup, session name: %s, window name: %s, pane number %s" tmux-session-name tmux-window-name tmux-pane-number))
 
+(defun tmux-exec-command ()
+  "Execute command defined by `tmux-exec-command-name'"
+  (interactive)
+  (tmux-exec tmux-exec-command-name))
+
+(defun tmux-exec-command-setup (command)
+  (interactive "sEnter command to execute: ")
+  (setq tmux-exec-command-name command)
+  (message "Tmux Command Setup, command: %s" tmux-exec-command-name))
+
+(global-set-key (kbd "<f6>") 'tmux-exec-command)
+
 (provide 'tmux)
