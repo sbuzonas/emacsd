@@ -48,9 +48,9 @@
 
 (load-config 'keybindings)
 
-(load-config 'mouse)
+;(load-config 'mouse)
 
-(load-config 'latex)
+;(load-config 'latex)
 
 (MacOSX
   (require-package 'exec-path-from-shell)
