@@ -1,3 +1,11 @@
+;; Some initial default mode settings
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
+;; No splash screen
+(setq inhibit-startup-message t)
+
 ;; Allow pasting selection outside of Emacs
 (setq x-select-enable-clipboard t)
 

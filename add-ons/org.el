@@ -214,11 +214,8 @@ return the result as a hex value."
   (global-set-key (kbd "<f2>") 'org-agenda)
   ;; Switch org buffer
   (global-set-key (kbd "C-c b") 'org-iswitchb)
-  ;; Go to currently clocked item
-  (global-set-key (kbd "<f3>") )
   ;; Capture a task
   (global-set-key (kbd "C-c c") 'org-capture)
-  ;; 
 
   (global-set-key "\C-cr" 'org-capture)
   (global-set-key "\C-cl" 'org-store-link)
