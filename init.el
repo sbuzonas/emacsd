@@ -68,6 +68,15 @@
 
 (global-set-key (kbd "C-a") 'back-to-indentation-or-beginning)
 
+(defun shell-command-on-buffer ()
+  "Asks for a command and executes it in inferior shell with current buffer as input."
+  (interactive)
+  (shell-command-on-region
+   (point-min) (point-max)
+   (read-shell-command "Shell command on buffer: ")))
+
+(global-set-key "\M-\"" 'shell-command-on-buffer)
+
 ;; Replace comment-dwim with ability to toggle comment on region
 (defun region-active-p () (and transient-mark-mode mark-active))
 (defun comment-dwim-line (&optional arg)
