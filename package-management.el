@@ -11,7 +11,7 @@
 
 (defvar my-default-packages '() "A list of packages to ensure are installed at launch.")
 
-(defun packages-install ()
+(defun package-install-default-packages ()
   (dolist (p my-default-packages)
     (when (not (package-installed-p p))
       (package-install p))))
@@ -28,6 +28,16 @@ re-downloaded in order to locate PACKAGE."
       (progn
         (package-refresh-contents)
         (require-package package min-version t)))))
+
+(defun package-list-non-default-packages ()
+  "Like `package-list-packages', but shows only the packages that
+are installed and not in `my-default-packages'."
+  (interactive)
+  (package-show-package-list
+   (remove-if-not (lambda (x) (and (not (memq x my-default-packages))
+                              (not (package-build-in-p x))
+                              (package-installed-p x)))
+                  (mapcar 'car package-archive-contents))))
 
 (package-initialize)
 
