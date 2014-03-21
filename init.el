@@ -22,8 +22,11 @@
 (require 'package-management)
 
 ;; Require appearance early, but package configuration is needed
-(message "* --[ Loading appearance settings ]--")
+(message "* --[ Loading appearance functionality ]--")
 (require 'appearance)
+
+(message "* --[ Loading navigation library ]--")
+(require 'navigation)
 
 (message "* --[ Loading user configuration ]--")
 (load-config 'defaults)
@@ -38,15 +41,6 @@
 
 (TMUX
  (require 'vagrant))
-
-;; Make C-a jump between start of line and start of indentation
-(defun back-to-indentation-or-beginning ()
-  (interactive)
-  (if (= (point) (save-excursion (back-to-indentation) (point)))
-      (beginning-of-line)
-    (back-to-indentation)))
-
-(global-set-key (kbd "C-a") 'back-to-indentation-or-beginning)
 
 (defun shell-command-on-buffer ()
   "Asks for a command and executes it in inferior shell with current buffer as input."
