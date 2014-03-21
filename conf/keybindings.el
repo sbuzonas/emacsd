@@ -25,6 +25,10 @@
 (global-set-key (kbd "M-t s") 'transpose-sexps)
 (global-set-key (kbd "M-t p") 'transpose-params)
 
+;; Buffer manipulations
+(global-set-key "\M-\"" 'shell-command-on-buffer)
+(global-set-key (kbd "M-;") 'comment-dwim-line)
+
 ;; Change next underscore with a camel case
 ;; (global-set-key (kbd "C-c C--") 'replace-next-underscore-with-camel)
 ;; (global-set-key (kbd "M-s M--") 'snakeify-current-word)

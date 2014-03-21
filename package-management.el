@@ -12,6 +12,16 @@
 (defvar my-default-packages '() "A list of packages to ensure are installed at launch.")
 
 (defun package-install-default-packages ()
+  (condition-case nil
+      (package-install-default-packages-no-fetch)
+
+    (error
+     (progn
+       (message "Error installing packages, attempting to refresh list.")
+       (package-refresh-contents)
+       (package-install-default-packages-no-fetch)))))
+
+(defun package-install-default-packages-no-fetch ()
   (dolist (p my-default-packages)
     (when (not (package-installed-p p))
       (package-install p))))
