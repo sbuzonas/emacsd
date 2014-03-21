@@ -21,19 +21,15 @@
 (message "* --[ Initializing package management ]--")
 (require 'package-management)
 
-(message "* --[ Loading user configuration ]--")
-(load-config 'defaults)
-(load-config 'backups)
-(load-config 'keybindings)
-
 ;; Require appearance early, but package configuration is needed
 (message "* --[ Loading appearance settings ]--")
 (require 'appearance)
 
-
-
+(message "* --[ Loading user configuration ]--")
+(load-config 'defaults)
+(load-config 'backups)
+(load-config 'keybindings)
 ;(load-config 'mouse)
-
 ;(load-config 'latex)
 
 (MacOSX
