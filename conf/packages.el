@@ -16,8 +16,7 @@
 
 ;; My Default Packages
 (defvar my-default-packages
-  '(smex
-    zenburn-theme)
+  '(smex)
   "A list of packages to ensure are installed at launch.")
 
 (defun packages-install ()
