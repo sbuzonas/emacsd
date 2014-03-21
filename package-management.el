@@ -9,15 +9,7 @@
 (when (< emacs-major-version 24)
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 
-(package-initialize)
-
-(when (not package-archive-contents)
-  (package-refresh-contents))
-
-;; My Default Packages
-(defvar my-default-packages
-  '(smex)
-  "A list of packages to ensure are installed at launch.")
+(defvar my-default-packages '() "A list of packages to ensure are installed at launch.")
 
 (defun packages-install ()
   (dolist (p my-default-packages)
@@ -27,7 +19,7 @@
 ;;; On-demand installation of packages
 (defun require-package (package &optional min-version no-refresh)
   "Install given PACKAGE, optionally requiring MIN-VERSION.
-If NO-REFRESH is non-nill, the available package lists will not be
+If NO-REFRESH is non-nil, the available package lists will not be
 re-downloaded in order to locate PACKAGE."
   (if (package-installed-p package min-version)
       t
@@ -36,3 +28,10 @@ re-downloaded in order to locate PACKAGE."
       (progn
         (package-refresh-contents)
         (require-package package min-version t)))))
+
+(package-initialize)
+
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+(provide 'package-management)

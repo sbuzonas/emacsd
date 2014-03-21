@@ -122,3 +122,8 @@
 
 ;; don't add newlines to end of buffer when scrolling
 (setq next-line-add-newlines nil)
+
+;; Save point position between sessions
+(require 'saveplace)
+(setq-default save-place t)
+(setq save-place-file (expand-file-name ".places" user-emacs-directory))

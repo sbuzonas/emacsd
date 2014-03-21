@@ -14,31 +14,23 @@
 (load custom-file)
 
 ;; Load environment specific macros
+(message "* --[ Loading environment libraries ]--")
 (require 'environment)
 
-;; Write backup files to own directory
-(setq backup-directory-alist
-      `(("." .,(expand-file-name
-                (concat user-emacs-directory "backups")))))
+;; Load package management library
+(message "* --[ Initializing package management ]--")
+(require 'package-management)
 
-;; Make backups of files, even when they're in version control
-(setq vc-make-backup-files t)
-
-;; Save point position between sessions
-(require 'saveplace)
-(setq-default save-place t)
-(setq save-place-file (expand-file-name ".places" user-emacs-directory))
-
-;; Initialize default packages
-(load-config 'packages)
+(message "* --[ Loading user configuration ]--")
+(load-config 'defaults)
+(load-config 'backups)
+(load-config 'keybindings)
 
 ;; Require appearance early, but package configuration is needed
 (message "* --[ Loading appearance settings ]--")
 (require 'appearance)
 
-(load-config 'defaults)
 
-(load-config 'keybindings)
 
 ;(load-config 'mouse)
 
