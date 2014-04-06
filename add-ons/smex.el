@@ -20,7 +20,7 @@
   ;; Use C-x C-m to do M-x per Steve Yegge's advice
   (global-set-key (kbd "C-x C-m") 'smex)
   
-  ;; Modify smex so that typing a space will insert a hyphon '-' like normal M-x
+  ;; Modify smex so that typing a space will insert a hyphen '-' like normal M-x
   (defadvice smex (around space-inserts-hyphen activate compile)
     (let ((ido-cannot-complete-command
            `(lambda ()
