@@ -1,4 +1,4 @@
-(after 'smex
+(after smex
   (smex-initialize)
   ;; Replace default "M-x" functionality
   (global-set-key (kbd "M-x") 'smex)
@@ -24,7 +24,7 @@
       (smex-update)))
   (add-hook 'after-load-functions 'smex-update-after-load))
 
-(after 'undo-tree
+(after undo-tree
   (global-undo-tree-mode)
   (setq undo-tree-outer-limit 36000000)
   (setq undo-tree-mode-lighter "")

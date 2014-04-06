@@ -9,7 +9,7 @@
     (add-to-list 'my-default-packages 'org2blog)
     (try-require 'org)))
 
-(after 'org
+(after org
 
   (defun myorg-update-parent-cookie ()
     (when (equal major-mode 'org-mode)

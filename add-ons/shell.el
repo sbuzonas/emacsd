@@ -9,7 +9,7 @@
     (add-to-list 'my-default-packages 'shell-command)
     (try-require 'shell)))
 
-(after 'shell
+(after shell
   ;; bash-completion
   (autoload 'bash-completion-dynamic-complete
     "bash-completion"
@@ -33,5 +33,5 @@
             (lambda ()
               (define-key shell-mode-map (kbd "C-d") 'comint-delchar-or-eor-or-kill-buffer))))
 
-(after 'shell-command
+(after shell-command
   (shell-command-completion-mode))

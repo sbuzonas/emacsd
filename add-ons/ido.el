@@ -12,7 +12,7 @@
     (add-to-list 'my-default-packages 'ido-ubiquitous)
     (try-require 'ido)))
 
-(after 'ido
+(after ido
   (ido-mode t)
   (setq ido-enable-prefix nil
         ido-enable-flex-matching t
@@ -23,32 +23,32 @@
         ido-max-prospects 10)
 
   ;; Filters ido-matches setting acronym matches in front of the results
-  (defadvice ido-set-matches-1 (after ido-acronym-matches activate)
-    (if (> (length ido-text) 1)
-	(let ((regex (concat "^" (mapconcat 'char-to-string ido-text "[^-]*-")))
-	      (acronym-matches (list))
-	      (remove-regexes '("-menu-")))
-	  ;; Creating the list of the results to be set as first
-	  (dolist (item items)
-	    (if (string-match (concat regex "[^-]*$") item) ;; strict match
-		(add-to-list 'acronym-matches item)
-	      (if (string-match regex item) ;; appending relaxed match
-		  (add-to-list 'acronym-matches item t))))
-
-	  ;; Filtering ad-return-value
-	  (dolist (to_remove remove-regexes)
-	    (setq ad-return-value
-		  (delete-if (lambda (item)
-			       (string-match to_remove item))
-			     ad-return-value)))
-
-	  ;; Creating resulting list
-	  (setq ad-return-value
-		(append acronym-matched
-			ad-return-value))
-
-	  (delete-dups ad-return-value)
-	  (reverse ad-return-value))))
+;;  (defadvice ido-set-matches-1 (after ido-acronym-matches activate)
+;;    (if (> (length ido-text) 1)
+;;	(let ((regex (concat "^" (mapconcat 'char-to-string ido-text "[^-]*-")))
+;;	      (acronym-matches (list))
+;;	      (remove-regexes '("-menu-")))
+;;	  ;; Creating the list of the results to be set as first
+;;	  (dolist (item items)
+;;	    (if (string-match (concat regex "[^-]*$") item) ;; strict match
+;;		(add-to-list 'acronym-matches item)
+;;	      (if (string-match regex item) ;; appending relaxed match
+;;		  (add-to-list 'acronym-matches item t))))
+;;
+;;	  ;; Filtering ad-return-value
+;;	  (dolist (to_remove remove-regexes)
+;;	    (setq ad-return-value
+;;		  (delete-if (lambda (item)
+;;			       (string-match to_remove item))
+;;			     ad-return-value)))
+;;
+;;	  ;; Creating resulting list
+;;	  (setq ad-return-value
+;;		(append acronym-matched
+;;			ad-return-value))
+;;
+;;	  (delete-dups ad-return-value)
+;;	  (reverse ad-return-value))))
 
   (try-require 'flx-ido)
   (try-require 'ido-vertical-mode)
@@ -74,18 +74,18 @@
   (try-require 'ido-at-point)
   (try-require 'ido-ubiquitous))
 
-(after 'flx-ido
+(after flx-ido
   (flx-ido-mode 1)
   ;; disable ido faces to see flx highlights.
   (setq ido-use-faces nil))
 
-(after 'ido-vertical-mode
+(after ido-vertical-mode
   (ido-vertical-mode))
 
-(after 'ido-at-point
+(after ido-at-point
   (ido-at-point-mode))
 
-(after 'ido-ubiquitous
+(after ido-ubiquitous
   (ido-ubiquitous-mode 1)
   (defmacro ido-ubiquitous-use-new-completing-read (cmd package)
     `(eval-after-load ,package

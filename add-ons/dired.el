@@ -9,7 +9,7 @@
     (add-to-list 'my-default-packages 'dired-details)
     (try-require 'dired)))
 
-(after 'dired
+(after dired
   (try-require 'dired-details)
   ;; Move files between split panes
   (setq dired-dwim-target t)
@@ -57,6 +57,6 @@
        (define-key wdired-mode-map (vector 'remap 'beginning-of-buffer) 'dired-back-to-top)
        (define-key wdired-mode-map (vector 'remap 'end-of-buffer) 'dired-jump-to-bottom))))
 
-(after 'dired-details
+(after dired-details
   (setq-default dired-details-hidden-string "--- ")
   (dired-details-install))

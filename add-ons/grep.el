@@ -7,7 +7,7 @@
 (when addon-grep
   (progn
     (add-to-list 'my-default-packages 's)
-    (after 'grep
+    (after grep
       (try-require 's)
 
       (defun rgrep-fullscreen (regexp &optional files dir confirm)

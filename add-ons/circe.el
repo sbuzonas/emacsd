@@ -25,7 +25,7 @@
 	  lui-flyspell-alist '(("." "american"))
 	  lui-highlight-keywords '("[^<]slbmeh"))))
 
-(after 'circe
+(after circe
   (try-require 'lui-irc-colors)
   (when (try-require 'circe-highlight-all-nicke)
     (enable-circe-highlight-all-nicks))
@@ -34,5 +34,5 @@
   (interactive)
   (circe "irc.freenode.net" "6667" "freenode")))
 
-(after 'lui-irc-colors
+(after lui-irc-colors
   (add-to-list 'lui-pre-output-hook 'lui-irc-colors))

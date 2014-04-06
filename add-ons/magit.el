@@ -10,7 +10,7 @@
     (add-to-list 'my-default-packages 'git-messenger)
     (try-require 'magit)))
 
-(after 'magit
+(after magit
   ;; Subtler highlight
   (set-face-background 'magit-item-highlight "#121212")
   (set-face-background 'diff-file-header "#121212")
@@ -21,7 +21,7 @@
   (set-default 'magit-stage-all-confirm nil)
   (set-default 'magit-unstage-all-confirm nil)
 
-  (after 'ediff
+  (after ediff
     (set-face-foreground 'ediff-odd-diff-B "#ffffff")
     (set-face-background 'ediff-odd-diff-B "#292521")
     (set-face-foreground 'ediff-even-diff-B "ffffff")
@@ -59,7 +59,7 @@
     (kill-buffer)
     (delete-window))
 
-  (after 'git-commit-mode
+  (after git-commit-mode
     (define-key git-commit-mode-map (kbd "C-c C-k") 'magit-exit-commit-mode))
 
   ;; C-c C-a to amend without any prompt
@@ -102,7 +102,7 @@
     (kill-buffer)
     (jump-to-register :vc-annotate-fullscreen))
 
-  (after 'vc-annotate
+  (after vc-annotate
     (defadvice vc-annotate (around fullscreen activate)
       (window-configuration-to-register :vc-annotate-fullscreen)
       ad-do-it
@@ -132,5 +132,5 @@
   ;; show blame for current line
   (try-require 'git-messenger))
 
-(after 'git-messenter
+(after git-messenter
   (global-set-key (kbd "C-x v p") #'git-messenger:popup-message))
