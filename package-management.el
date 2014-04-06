@@ -24,7 +24,20 @@
 (defun package-install-default-packages-no-fetch ()
   (dolist (p my-default-packages)
     (when (not (package-installed-p p))
-      (package-install p))))
+      (package-install p)))
+  (dolist (l missing-packages-list)
+    (condition-case err
+        (progn
+          (message "Attempting to load library `%s'..." l)
+          (if (stringp l)
+              (load-library l)
+            (require l))
+          (message "Found missing library `%s'..." l)
+          (remove l missing-packages-list))
+      (file-error
+       (message "Could not locate library `%s'!" l)
+       nil))))
+      
 
 ;;; On-demand installation of packages
 (defun require-package (package &optional min-version no-refresh)
