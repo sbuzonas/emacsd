@@ -48,6 +48,9 @@
 (message "* --[ Installing defined packages ]--")
 (package-install-default-packages)
 
+;; Load default package configuration
+(load-config 'package-defaults)
+
 ;; Output completion messages
 (message "* --[ Emacs initialization complete ]--")
 (if missing-packages-list
