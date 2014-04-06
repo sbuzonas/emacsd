@@ -130,10 +130,27 @@ of an error, just add the package to a list of missing packages."
             nil)))
 (put 'with-library 'lisp-indent-function 1)
 
-(defmacro after (mode &rest body)
-  "`eval-after-load' MODE evaluate BODY."
-  (declare (indent defun))
-  `(eval-after-load ,mode
-    '(progn ,@body)))
+(defmacro after (feature &rest forms)
+  "After FEATURE is loaded, evaluate FORMS.
+
+FORMS is byte compiled.
+
+FEATURE may be a named feature or a file name, see
+`eval-after-load' for details."
+  (declare (indent 1) (debug t))
+  ;; Byte compile the body.  If the feature is not available, ignore the warnings.
+  ;; Taken from
+  ;; http://lists.gnu.org/archive/html/bug-gnu-emacs/2012-11/msg01262.html
+  `(,(if (or (not (boundp 'byte-compile-current-file))
+	     (not byte-compile-current-file)
+	     (if (symbolp feature)
+		 (require feature nil :no-error)
+	       (load feature :no-message :no-error)))
+	 'progn
+       (message "after: cannot find `%s'" feature)
+       'with-no-warnings)
+    (eval-after-load ',feature
+      `(funcall (function, (lambda () ,@forms))))))
+(put 'after 'list-indent-function 1)
 
 (provide 'load-path)
