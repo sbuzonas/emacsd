@@ -28,6 +28,7 @@
  '(large-file-warning-threshold nil)
  '(magit-use-overlays nil)
  '(org-agenda-files (quote ("~/projects/django-vagrant/todo.org")))
+ '(php t)
  '(php-completion-file "/Users/sbuzonas/.emacs.d/php-completion-file")
  '(php-executable "/usr/local/bin/php")
  '(php-manual-path "/Users/sbuzonas/docs/php-chunked-xhtml")
