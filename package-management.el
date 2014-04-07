@@ -44,6 +44,7 @@
   "Install given PACKAGE, optionally requiring MIN-VERSION.
 If NO-REFRESH is non-nil, the available package lists will not be
 re-downloaded in order to locate PACKAGE."
+  (add-to-list 'my-default-packages package)
   (if (package-installed-p package min-version)
       t
     (if (or (assoc package package-archive-contents) no-refresh)
