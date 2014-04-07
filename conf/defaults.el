@@ -57,8 +57,11 @@
 (setq line-number-mode t)
 (setq column-number-mode t)
 
+;; Set line numbers when displayed in a gutter to be 4 characters wide followed by a line and a space
+(setq linum-format"%4d \u2502 ")
+
 ;; Lines should be 120 characters wide, not 72
-(setq fill-column 120)
+(setq-default fill-column 120)
 
 ;; Save a list of recent files visited. (open recent file with C-x f)
 (recentf-mode 1)
