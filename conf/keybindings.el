@@ -1,5 +1,8 @@
 (global-set-key (kbd "M-g") 'goto-line)
 
+;; Toggle line numbers
+(global-set-key (kbd "C-c n") 'linum-mode)
+
 ;; Make C-a jump between start of line and start of indentation
 (global-set-key (kbd "C-a") 'back-to-indentation-or-beginning)
 
