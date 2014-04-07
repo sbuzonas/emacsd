@@ -4,43 +4,18 @@
   :group 'emacs)
 
 (defmacro defaddon (symbol require &rest forms)
-  (let ((args '(:type 'boolean :group 'addons))
-        req)
-    `,(if require
-          (progn
-            (setq req (list :require require))))
-    `(defcustom ,symbol
-       nil
-       ,(format "Functionality for %s" symbol)
-       :set (lambda (symbol value)
-              `(funcall (message "hello"))
-              ;; Return the new value
-              value)
-       ,@(append args req))))
-;;  (if require
-;;      (progn
-;;	`(defcustom ,symbol
-;;	   nil
-;;	   ,doc
-;;           :set (lambda (symbol value)
-;;		  (when value
-;;		    `(funcall `(function ,(lambda () @forms)))))
-;;	   :type 'boolean
-;;	   :group 'addons))
-;;    (progn
-;;      `(defcustom ,symbol
-;;	 nil
-;;	 ,doc
-;;           :set (lambda (symbol value)
-;;		  (when value
-;;		    `(funcall `(function ,(lambda () @forms))))
-;;                  value)
-;;	 :type 'boolean
-;;	 :group 'addons))))
-
-;;(defaddon test
-;;  'smex
-;;  (message "Hello, world!"))
+  (progn
+    (add-hook 'after-init-hook `(lambda () (when ,symbol
+                                        ,@forms)))
+    (let ((args '(:type 'boolean :group 'addons))
+          req)
+      `,(if require
+            (progn
+              (setq req (list :require require))))
+      `(defcustom ,symbol
+         nil
+         ,(format "Functionality for %s" symbol)
+         ,@(append args req)))))
 
 (load-directory (expand-file-name "add-ons" user-emacs-directory))
 
