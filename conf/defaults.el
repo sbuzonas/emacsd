@@ -143,3 +143,11 @@
 
 (add-to-list 'my-default-packages 'smex)
 (add-to-list 'my-default-packages 'undo-tree)
+
+(add-to-list 'auto-mode-alist '("Cheffile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Cheffile.lock$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile.lock$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("Guardfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("composer.lock$" . json-mode))
