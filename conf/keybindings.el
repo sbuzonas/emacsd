@@ -32,6 +32,12 @@
 (global-set-key "\M-\"" 'shell-command-on-buffer)
 (global-set-key (kbd "M-;") 'comment-dwim-line)
 
+;; Window switching, see also the tmux implementation
+(global-set-key [S-left] 'windmove-left)
+(global-set-key [S-right] 'windmove-right)
+(global-set-key [S-up] 'windmove-up)
+(global-set-key [S-down] 'windmove-down)
+
 ;; Change next underscore with a camel case
 ;; (global-set-key (kbd "C-c C--") 'replace-next-underscore-with-camel)
 ;; (global-set-key (kbd "M-s M--") 'snakeify-current-word)
