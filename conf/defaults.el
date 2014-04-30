@@ -131,5 +131,15 @@
 (setq-default save-place t)
 (setq save-place-file (expand-file-name ".places" user-emacs-directory))
 
+;; Default user variables
+(setq user-full-name "Steve Buzonas")
+;; Set user-mail-address and user-website to carnegielearning if on a carnegielearning machine
+(if (not (= 0 (call-process-shell-command "hostname" nil nil nil "| grep -q 'carnegielearning.com$'")))
+    (progn
+      (setq user-mail-address "steve@fancyguy.com")
+      (setq user-website "http://www.stevebuzonas.com"))
+  (setq user-mail-address "sbuzonas@carnegielearning.com")
+  (setq user-website "http://www.carnegielearning.com"))
+
 (add-to-list 'my-default-packages 'smex)
 (add-to-list 'my-default-packages 'undo-tree)
