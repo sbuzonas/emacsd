@@ -48,6 +48,13 @@
 (global-set-key "\C-w" 'backward-kill-word)
 (global-set-key "\C-x\C-k" 'kill-region)
 (global-set-key "\C-c\C-k" 'kill-region)
+(global-set-key (kbd "<C-tab>") 'bury-buffer)
+
+(defun custom-key-sequences ()
+  "Add some escape sequences defined in iterm for keys that aren't normally sent to terminal."
+  (interactive)
+  (define-key input-decode-map "\e[27;5;9~" [C-tab])
+  (define-key input-decode-map "\e[27;6;9~" [C-S-tab]))
 
 (defun fix-arrow-keys ()
   "Some arrow key combinations are mapped incorrectly. This will fix it."
@@ -128,4 +135,5 @@
 ;; Map function keys to modifiers
 (add-hook 'term-setup-hook (lambda ()
                              (fix-arrow-keys)
-                             (fix-function-keys)))
+			     (fix-function-keys)
+			     (custom-key-sequences)))
