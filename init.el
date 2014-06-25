@@ -38,8 +38,9 @@
 (load-config 'defaults)
 (load-config 'backups)
 (load-config 'keybindings)
-;(load-config 'mouse)
-;(load-config 'latex)
+(load-config 'modeline)
+(load-config 'mouse)
+(load-config 'latex)
 
 (MacOSX
  (load-config 'darwin))
