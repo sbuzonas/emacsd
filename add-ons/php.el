@@ -1,10 +1,11 @@
 (defaddon php
   nil
   (require-package 'php-mode)
+  (require-package 'php-extras)
   (require-package 'gtags)
 
-  (require 'fancyguy-tempo)
-  (setq tempo-interactive t)
+;;  (require 'fancyguy-tempo)
+;;  (setq tempo-interactive t)
 
   (defvar php-tempo-tags nil
     "Tempo tags for PHP mode")
@@ -12,76 +13,11 @@
   (defvar php-tempo-keys-alist nil
     "")
 
-  (tempo-define-template "php-if"
-                         '(> "if (" ~ ") {" n>
-                           > n
-                           "}" > n>
-                           )
-                         "if"
-                         "Insert an if statement"
-                         'php-tempo-tags)
-
-  (tempo-define-template "php-else"
-                         '(> "} else {" n>
-                           > ~ n
-			 )
-                         "else"
-                         "Insert an else statement"
-                         'php-tempo-tags)
-
-  (tempo-define-template "php-else-if"
-                         '(> "} else if (" ~ ") {" n>
-                           > n
-			 )
-                         "elif"
-                         "Insert an else if statement"
-                         'php-tempo-tags)
-
-  (tempo-define-template "php-while"
-                         '(> "while (" ~ ") {" n>
-                           > n
-                           "}" > n>
-                         )
-                         "while"
-                         "Insert a while statement"
-                         'php-tempo-tags)
-
-  (tempo-define-template "php-for"
-                         '(> "for (" ~ ") {" n>
-                           > n
-                           "}" > n>
-                         )
-                         "for"
-                         "Insert a for loop"
-                         'php-tempo-tags)
-
-  (tempo-define-template "php-fori"
-                         '(> "for ($" (p "variable: " var) " = 0; $" (s var)
-                           " < " (p "upper bound: " ub)"; $" (s var) "++) {" > n>
-                           > r n
-                           "}" > n>
-                         )
-                         "fori"
-                         "Insert a for loop: for($i = 0: $i < ..; $i++)"
-                         'php-tempo-tags)
-
-  (tempo-define-template "php-foreach"
-                         '(> "foreach ($" (p "variable: " var) " as $" (p "as: " as) ") {" n>
-                           > ~ n
-                           "}" > n>
-                         )
-                         "fe"
-                         "Insert a foreach loop."
-                         'php-tempo-tags)
-
-  (tempo-define-template "php-foreachkv"
-                         '(> "foreach ($" (p "variable: " var) " as $k => $v) {" n>
-                           > ~ n
-                           "}" > n>
-                         )
-                         "fekv"
-                         "Insert a foreach loop: foreach ($.. as $k => $v)"
-                         'php-tempo-tags)
+;;  (add-hook 'php-mode-hook (lambda ()
+;;                             (setq indent-tabs-mode t)
+;;                             (setq tab-stop-list (number-sequence 4 200 4))
+;;                             (setq tab-width 4)
+;;                             (setq indent-line-function 'insert-tab)))
 
   (defun gtags-create-or-update ()
     "create or update the gnu global tag file"
@@ -98,11 +34,16 @@
 
   (add-hook 'php-mode-hook
             (lambda ()
-              (require 'gtags)
-              (local-set-key (kbd "C-c t") 'tempo-complete-tag)
-              (tempo-use-tag-list 'php-tempo-tags)
-              (gtags-mode t)
-              (gtags-create-or-update)))
+              (when buffer-file-name
+                (require 'gtags)
+;;              (local-set-key (kbd "C-c t") 'tempo-complete-tag)
+;;              (tempo-use-tag-list 'php-tempo-tags)
+                (gtags-mode t)
+                (gtags-create-or-update))
+              (which-func-mode)
+              (eldoc-mode)))
+
+  (setq initial-major-mode 'php-mode)
 
   (add-hook 'gtags-mode-hook
             (lambda ()
