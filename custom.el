@@ -28,6 +28,8 @@
  '(fci-rule-color "#383838")
  '(gnus t)
  '(gud-gdb-command-name "gdb --annotate=1")
+ '(ido-ubiquitous-command-overrides (quote ((disable exact "execute-extended-command") (enable prefix "wl-") (enable-old prefix "Info-") (enable exact "webjump") (enable regexp "\\`\\(find\\|load\\|locate\\)-library\\'") (disable prefix "org-") (disable prefix "magit-") (disable prefix "tmm-") (enable regexp "\\`\\(load\\|enable\\|disable\\|describe\\|custom-theme-visit-theme\\)-theme\\'"))))
+ '(ido-ubiquitous-function-overrides (quote ((disable exact "read-file-name") (disable exact "read-file-name-internal") (disable exact "read-buffer") (disable exact "gnus-emacs-completing-read") (disable exact "gnus-iswitchb-completing-read") (disable exact "grep-read-files") (enable exact "bookmark-completing-read") (enable-old exact "webjump-read-choice") (enable-old exact "webjump-read-url-choice") (disable exact "isearchp-read-unicode-char") (disable exact "org-completing-read") (disable exact "org-completing-read-no-i") (disable exact "org-iswitchb-completing-read") (disable exact "org-icompleting-read") (enable exact "read-char-by-name") (disable exact "Info-read-node-name") (disable exact "tmm-menubar"))))
  '(large-file-warning-threshold nil)
  '(magit-use-overlays nil)
  '(org-agenda-files (quote ("~/projects/django-vagrant/todo.org")))
