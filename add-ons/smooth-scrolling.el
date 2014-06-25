@@ -1,10 +1,4 @@
-(defcustom addon-smooth-scrolling
+(defaddon smooth-scolling
   nil
-  "Enable smooth-scrolling features"
-  :type 'boolean
-  :group 'features)
-
-(when addon-smooth-scrolling
-  (progn
-    (add-to-list 'my-default-packages 'smooth-scrolling)
-    (try-require 'smooth-scrolling)))
+  (require-package 'smooth-scrolling)
+  (require 'smooth-scrolling))
