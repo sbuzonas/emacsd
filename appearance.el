@@ -22,12 +22,12 @@
 
 ;; Initialize dark theme
 (require-package 'tango-2-theme)
-(setq dark-theme 'tango-2)
+(setq dark-theme 'tango-dark)
 
 ;; Initialize light theme
 (require-package 'solarized-theme)
 (require-package 'zenburn-theme)
-(setq light-theme 'zenburn)
+(setq light-theme 'tsdh-dark)
 
 (setq current-theme nil)
 
