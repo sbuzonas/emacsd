@@ -31,6 +31,9 @@
 ;; Enable syntax highlighting for older Emacsen that have it off
 (global-font-lock-mode t)
 
+;; Consider large files to be anything >100MB
+(setq large-file-warning-threshold 100000000)
+
 ;; Answering just 'y' or 'n' will do
 (defalias 'yes-or-no-p 'y-or-n-p)
 
