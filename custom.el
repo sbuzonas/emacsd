@@ -21,6 +21,7 @@
  '(addon-shell t)
  '(addon-smooth-scrolling t)
  '(ansi-color-names-vector ["#3F3F3F" "#CC9393" "#7F9F7F" "#F0DFAF" "#8CD0D3" "#DC8CC3" "#93E0E3" "#DCDCCC"])
+ '(convenience t)
  '(custom-enabled-themes (quote (tango-2)))
  '(custom-safe-themes (quote ("cd70962b469931807533f5ab78293e901253f5eeb133a46c2965359f23bfb2ea" "a53714de04cd4fdb92ed711ae479f6a1d7d5f093880bfd161467c3f589725453" "11d069fbfb0510e2b32a5787e26b762898c7e480364cbc0779fe841662e4cf5d" "a3d519ee30c0aa4b45a277ae41c4fa1ae80e52f04098a2654979b1ab859ab0bf" "9370aeac615012366188359cb05011aea721c73e1cb194798bc18576025cabeb" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "bad832ac33fcbce342b4d69431e7393701f0823a3820f6030ccc361edd2a4be4" default)))
  '(editorconfig t)
