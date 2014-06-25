@@ -59,7 +59,7 @@ are installed and not in `my-default-packages'."
   (interactive)
   (package-show-package-list
    (remove-if-not (lambda (x) (and (not (memq x my-default-packages))
-                              (not (package-build-in-p x))
+                              (not (package-built-in-p x))
                               (package-installed-p x)))
                   (mapcar 'car package-archive-contents))))
 
