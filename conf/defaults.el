@@ -6,6 +6,8 @@
 ;; No splash screen
 (setq inhibit-startup-message t)
 
+(setq initial-scratch-message nil)
+
 ;; Allow pasting selection outside of Emacs
 (setq x-select-enable-clipboard t)
 
