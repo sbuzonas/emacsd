@@ -31,6 +31,9 @@
 (message "* --[ Loading buffer manipulations ]--")
 (require 'buffer-manipulation)
 
+(message "* --[ Initializing org-mode ]--")
+(require 'org)
+
 (message "* --[ Initializing add-ons ]--")
 (require 'add-ons)
 
