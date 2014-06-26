@@ -48,6 +48,7 @@
  '(smooth-scolling t)
  '(smtpmail-smtp-server "mail.carnegielearning.com")
  '(smtpmail-smtp-service 25)
+ '(sr-speedbar-skip-other-window-p t)
  '(term-default-bg-color "#fdf6e3")
  '(term-default-fg-color "#657b83")
  '(tmux t)
