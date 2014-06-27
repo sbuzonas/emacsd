@@ -134,21 +134,22 @@
 ;; Save point position between sessions
 (require 'saveplace)
 (setq-default save-place t)
-(setq save-place-file (expand-file-name ".places" user-emacs-directory))
+(setq save-place-file (expand-file-name "../.emacs-saveplace" user-emacs-directory))
 
 ;; Default user variables
 (setq user-full-name "Steve Buzonas")
 ;; Set user-mail-address and user-website to carnegielearning if on a carnegielearning machine
-(if (not (= 0 (call-process-shell-command "hostname" nil nil nil "| grep -q 'carnegielearning.com$'")))
-    (progn
-      (setq user-mail-address "steve@fancyguy.com")
-      (setq user-website "http://www.stevebuzonas.com"))
-  (setq user-mail-address "sbuzonas@carnegielearning.com")
-  (setq user-website "http://www.carnegielearning.com"))
+(if (string-match "sbuzonas" system-name)
+    (setq user-mail-address "sbuzonas@carnegielearning.com"
+          user-website "http://www.carnegielearning.com")
+  (setq user-mail-address "steve@fancyguy.com"
+        user-website "http://www.stevebuzonas.com"))
 
 (add-to-list 'my-default-packages 'smex)
 (add-to-list 'my-default-packages 'undo-tree)
+(add-to-list 'my-default-packages 'crontab-mode)
 
+(add-to-list 'auto-mode-alist '("crontab.*" . crontab-mode))
 (add-to-list 'auto-mode-alist '("Cheffile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Cheffile.lock$" . yaml-mode))
 (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
