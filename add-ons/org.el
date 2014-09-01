@@ -1,5 +1,6 @@
 (defaddon org
   nil
+  (require-package 'org-journal)
   (require-package 'xml-rpc)
   (require-package 'org2blog)
 
@@ -16,24 +17,36 @@
   (defadvice kill-whole-line (after fix-cookies activate)
     (myorg-update-parent-cookie))
 
-  (setq org-directory "~/Documents/org")
+  (setq org-directory "~/Dropbox/org-mode")
+  (setq org-journal-dir (concat org-directory "/journal/"))
+  (add-to-list 'org-agenda-files (expand-file-name org-journal-dir))
+  (setq org-agenda-file-regexp "\\`[^.].*\\.org'\\|[0-9]+")
   (setq org-default-notes-file (concat org-directory "/notes.org"))
+  (setq org-default-capture-file (concat org-directory "/refile.org"))
+
+  (require 'org-journal)
+
+  (defun myorg-gtd ()
+    (interactive)
+    (find-file org-default-capture-file))
+  (global-set-key (kbd "C-c g") 'myorg-gtd)
+
   (setq org-capture-templates
-        '(("t" "Todo" entry (file (concat org-directory "/refile.org"))
+        '(("t" "Todo" entry (file org-default-capture-file)
            "* TODO %?\n%U\n%a\n" :clock-in t :clock-resume t)
-          ("r" "Respond" entry (file (concat org-directory "/refile.org"))
+          ("r" "Respond" entry (file org-default-capture-file)
            "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
-          ("n" "Note" entry (file (concat org-directory "/refile.org"))
+          ("n" "Note" entry (file org-default-capture-file)
            "* %? :NOTE:\n%U\n%a\n" :clock-in t :clock-resume t)
           ("j" "Journal" entry (file+datetree (concat org-directory "/diary.org"))
            "* %?\n%U\n" :clock-in t :clock-resume t)
           ("w" "org-protocol" entry (file (concat org-directory "/diary.org"))
            "* TODO Review %c\n%U\n" :immediate-finish t)
-          ("m" "Meeting" entry (file (concat org-directory "/refile.org"))
+          ("m" "Meeting" entry (file org-default-capture-file)
            "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
-          ("p" "Phone call" entry (file (concat org-directory "/refile.org"))
+          ("p" "Phone call" entry (file org-default-capture-file)
            "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
-          ("h" "Habit" entry (file (concat org-directory "/refile.org"))
+          ("h" "Habit" entry (file org-default-capture-file)
            "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"<%Y-%m-%d %a .+1d/3d>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n")
           ("l" "Link" plain (file (concat org-directory "/links.org"))
            "- %?\n %x\n")))
