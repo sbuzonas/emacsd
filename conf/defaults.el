@@ -136,10 +136,22 @@
 (setq-default save-place t)
 (setq save-place-file (expand-file-name "../.emacs-saveplace" user-emacs-directory))
 
+(defun string/ends-with (string suffix)
+  "Return t if STRING ends with SUFFIX."
+  (and (string-match (rx-to-string `(: ,suffix eos) t)
+                     string)
+       t))
+
+(defun string/starts-with (string prefix)
+  "Return t if STRING starts with PREFIX."
+  (and (string-match (rx-to-string `(: bos ,prefix) t)
+                     string)
+       t))
+
 ;; Default user variables
 (setq user-full-name "Steve Buzonas")
 ;; Set user-mail-address and user-website to carnegielearning if on a carnegielearning machine
-(if (string-match "sbuzonas" system-name)
+(if (string/starts-with system-name "sbuzonas")
     (setq user-mail-address "sbuzonas@carnegielearning.com"
           user-website "http://www.carnegielearning.com")
   (setq user-mail-address "steve@fancyguy.com"
