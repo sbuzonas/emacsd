@@ -23,6 +23,8 @@
  '(editorconfig t)
  '(fci-rule-color "#383838")
  '(git t)
+ '(gnus t)
+ '(grep t)
  '(gud-gdb-command-name "gdb --annotate=1")
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
  '(highlight-symbol-colors (--map (solarized-color-blend it "#fdf6e3" 0.25) (quote ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
