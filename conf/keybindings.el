@@ -1,4 +1,5 @@
 (global-set-key (kbd "M-g") 'goto-line)
+(global-set-key (kbd "C-x C-l") 'goto-line)
 
 ;; Toggle line numbers
 (global-set-key (kbd "C-c n") 'linum-mode)
@@ -10,6 +11,12 @@
 ;; pressing `M-p' (or `M-n')
 (global-set-key (kbd "M-p") 'move-line-up)
 (global-set-key (kbd "M-n") 'move-line-down)
+
+;; Switch isearch with isearch-regexp
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-M-r") 'isearch-backward)
+(global-set-key (kbd "C-M-s") 'isearch-forward)
 
 ;; shortcuts under c-x for buffer start and end
 (global-set-key (kbd "C-x t") 'beginning-of-buffer)
