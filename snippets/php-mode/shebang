@@ -1,6 +1,0 @@
-# -*- mode: emacs-lisp-mode -*-
-(tempo-define-template "php-shebang"
-                       '(> "#!/usr/bin/env php" n>)
-                       "#!"
-                       "Insert shebang"
-                       'php-tempo-tags)
