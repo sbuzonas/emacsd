@@ -29,10 +29,14 @@
   "The directory to store backups and autosaves")
 (defvar vendor-dir (expand-file-name "vendor" load-emacs-dir)
   "The directory where 3rd party elisp code is stored")
+(defvar shared-dir (expand-file-name "shared" load-emacs-dir)
+  "The directory that is persistent between machines")
 
 ;; Define the names of the variable files
 (defvar variables-file (expand-file-name "variables.el" config-dir)
   "The file containing primary variable definitions")
+(defvar encrypted-variables-file (expand-file-name "secrets.el.gpg" config-dir)
+  "The file containing sensitive information such as passwords")
 (defvar local-variables-file (expand-file-name "local-variables.el" config-dir)
   "The file containing primary variable definitions for the local machine")
 
@@ -62,6 +66,7 @@
 (require 'fg-core)
 (fg/add-to-load-path vendor-dir t t)
 
+(require 'fg-secrets)
 (require 'fg-packages)
 (require 'fg-addons)
 
