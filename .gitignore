@@ -1,15 +1,3 @@
-auto-save-list
-backups
-history
-*~
-.places
-session.*
-tramp
-elpa
-swank
-emms
-*.elc
-.DS_Store
-.yas-compiled-snippets.el
-.cask
-.smex-items
+# vendor is in a global ignore from chef and composer, unignore it
+!vendor
+custom.el
