@@ -10,8 +10,6 @@
     "Programming mode defaults"
     (require 'which-func)
     (which-function-mode t)
-    (fg/font-lock-annotations)
-    (smartparens-mode t)
-    (flycheck-mode t))
+    (fg/font-lock-annotations))
 
   (add-hook 'prog-mode-hook 'fg/prog-mode-hook))
