@@ -3,6 +3,9 @@
   (require-package 'org-journal)
   (require-package 'xml-rpc)
   (require-package 'org2blog)
+  (require-package 'org-jira)
+
+  (require 'org-jira)
 
   (defun myorg-update-parent-cookie ()
     (when (equal major-mode 'org-mode)
@@ -18,6 +21,7 @@
     (myorg-update-parent-cookie))
 
   (setq org-directory "~/Dropbox/org-mode")
+  (setq diary-file (concat org-directory "/diary.org"))
   (setq org-journal-dir (concat org-directory "/journal/"))
   (add-to-list 'org-agenda-files (expand-file-name org-journal-dir))
   (setq org-agenda-file-regexp "\\`[^.].*\\.org'\\|[0-9]+")
