@@ -9,12 +9,13 @@
 	 '(("gnu" . "http://elpa.gnu.org/packages/")))
        package-archives))
 
-(defvar fg/default-packages '(cus-edit+)
+(defvar fg/default-packages '()
   "A list of packages to ensure are installed at launch.")
 
 (defvar fg/mode-auto-install-alist
   '((clojure-mode . clojure-mode)
     (coffee-mode . coffee-mode)
+    (crontab-mode . crontab-mode)
     (css-mode . css-mode)
     (d-mode . d-mode)
     (dart-mode . dart-mode)
@@ -80,36 +81,52 @@ are installed and not in `fg/default-packages'."
 				   (package-installed-p x)))
 		  (mapcar 'car package-archive-contents))))
 
-(defun fg/auto-install-mode (orig-fun list-var list &optional append compare-fn)
-  (let ((res nil))
-    (when (eq 'auto-mode-alist list-var)
-      (let* ((replacement-list '())
-	     (pattern (car list))
-	     (mode (cdr list))
-	     (package (cdr (assoc mode fg/mode-auto-install-alist))))
-	(when (and package
-		   (not (package-installed-p package)))
-          (message "old list: %S" list)
-	  (setq list (cons pattern `(lambda ()
-				      (unless (package-installed-p ',package)
-					(package-install ',package))
-				      (,mode))))
-	  (message "new list: %S" list))))
-    (setq res (apply orig-fun list-var list append compare-fn))
-    res))
+(defun fg/auto-install-mode (orig-fun list-var item &optional append compare-fn)
+  (when debug-on-error (message "Advice called"))
+  (unless append
+    (setq append nil))
+  (unless compare-fn
+    (setq compare-fn nil))
+  (when (eq 'auto-mode-alist list-var)
+    (when debug-on-error (message "Correct list"))
+    (let ((pattern (car item))
+	  (callback (cdr item)))
+      (when debug-on-error (message "Pattern: %S; Callback: %S" pattern callback))
+      (when (symbolp callback)
+	(let ((package (cdr (assoc callback fg/mode-auto-install-alist))))
+	  (when package
+	    (when debug-on-error (message "Package: %s" package))
+	    (setq item (cons pattern `(lambda ()
+					(unless (package-installed-p ',package)
+					  (package-install ',package))
+					(,callback))))
+					(when debug-on-error (message "item: %S" item))
+		  )))))
+
+
+  (apply orig-fun list-var item append compare-fn))
 (advice-add 'add-to-list :around #'fg/auto-install-mode)
 
 (setq fg/mode-autoloads-initialized nil)
 
+(defun fg/build-auto-mode-atom (element)
+  (let ((pattern (car element))
+	(callback (cdr element)))
+    (when (symbolp callback)
+      (setq element (cons pattern callback))))
+  element)
+
 (defun fg/bootstrap-mode-installers ()
   (unless fg/mode-autoloads-initialized
     (with-temp-message "Bootstrapping predefined autoloads with installers..."
-      (let ((fg/autoloads auto-mode-alist))
+      (let* ((old-list (copy-list auto-mode-alist))
+	     (new-list (mapcar 'fg/build-auto-mode-atom old-list)))
 	(setq auto-mode-alist '())
-	(dolist (element fg/autoloads)
-	  (add-to-list 'auto-mode-alist element)))
-      (message "%s" "Bootstrapping predefined autoloads with installers...done.")
-      (setq fg/mode-autoloads-initialized t))))
+	(dolist (element new-list)
+	  (add-to-list 'auto-mode-alist element t)))
+      auto-mode-alist)
+    (message "%s" "Bootstrapping predefined autoloads with installers...done.")
+    (setq fg/mode-autoloads-initialized t)))
   
 (package-initialize)
 (when (not package-archive-contents)
