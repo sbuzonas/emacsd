@@ -153,9 +153,11 @@
 ;; Set user-mail-address and user-website to carnegielearning if on a carnegielearning machine
 (if (string/starts-with system-name "sbuzonas")
     (setq user-mail-address "sbuzonas@carnegielearning.com"
-          user-website "http://www.carnegielearning.com")
+          user-website "http://www.carnegielearning.com"
+          jiralib-url "https://carnegielearning.atlassian.net")
   (setq user-mail-address "steve@fancyguy.com"
-        user-website "http://www.stevebuzonas.com"))
+        user-website "http://www.stevebuzonas.com"
+        jiralib-url "https://fancyguy.atlassian.net"))
 
 (add-to-list 'my-default-packages 'smex)
 (add-to-list 'my-default-packages 'undo-tree)
