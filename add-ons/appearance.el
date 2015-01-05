@@ -1,6 +1,17 @@
 (defaddon appearance
   "Appearance enhancements and theme interactions."
-  (fg/require-packages '(tango-2-theme solarized-theme zenburn-theme))
+  (defvar fg/default-theme 'tango-2-theme)
+  
+  (defvar fg/theme-mode-package-alist '((tango-2-theme . tango-2-theme)
+					(solarized-theme . solarized-theme)
+					(zenburn-theme . zenburn-theme))
+    "Association list of (theme-function . theme-package) cons cells")
+
+  (when fg/default-theme
+    (unless (fboundp fg/default-theme)
+      (package-install (cdr (assoc fg/default-theme fg/theme-mode-package-alist))))
+    (fg/default-theme))
+
   (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
   (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
   (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
