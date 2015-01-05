@@ -40,4 +40,25 @@ Do it recursively if the third argument is not nil."
        ((and (eq isdir nil) (string= (substring path -3) ".el"))
 	(load (file-name-sans-extension fullpath)))))))
 
+(defmacro after (feature &rest forms)
+    "After FEATURE is loaded, evaluate FORMS.
+FORMS is byte compiled.
+FEATURE may be a named feature or a file name, see
+`eval-after-load' for details."
+    (declare (indent 1) (debug t))
+    ;; Byte compile the body.  If the feature is not available, ignore the warnings.
+    ;; Taken from
+    ;; http://lists.gnu.org/archive/html/bug-gnu-emacs/2012-11/msg01262.html
+    `(,(if (or (not (boundp 'byte-compile-current-file))
+	       (not byte-compile-current-file)
+	       (if (symbolp feature)
+		   (require feature nil :no-error)
+		 (load feature :no-message :no-error)))
+	   'progn
+	 (message "after: cannot find `%s'" feature)
+	 'with-no-warnings)
+      (eval-after-load ',feature
+	`(funcall (function, (lambda () ,@forms))))))
+(put 'after 'list-indent-function 1)
+
 (provide 'fg-load)
