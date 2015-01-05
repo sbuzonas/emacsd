@@ -6,10 +6,6 @@
     "Default theme to load at startup")
 
   (defvar fg/theme-mode-package-alist '((afternoon . afternoon-theme)
-					(alect-light . alect-themes)
-					(alect-light-alt . alect-themes)
-					(alect-dark . alect-themes)
-					(alect-dark-alt . alect-themes)
 					(ample . ample-theme)
 					(ample-zen . ample-zen-theme)
 					(anti-zenburn . anti-zenburn-theme)
@@ -41,7 +37,7 @@
 					(zenburn . zenburn-theme))
     "Association list of (theme-name . theme-package) cons cells")
 
-  ;(add-to-list 'fg/theme-mode-package-alist '(birds-of-paradise . birds-of-paradise-plus-theme))
+  (add-to-list 'fg/theme-mode-package-alist '(birds-of-paradise-plus . birds-of-paradise-plus-theme))
 
   (defvar fg/blacklisted-themes-list '()
     "Themes that should not be loaded for various reasons.")
@@ -82,10 +78,11 @@
     (mapcar #'disable-theme custom-enabled-themes))
   
   (defun fg/load-theme (theme)
+    (message "%S" theme)
     (let ((theme-package (cdr (assoc theme fg/theme-mode-package-alist))))
       (when theme-package
 	(fg/require-package theme-package)
-	(with-temp-message (concat "Loading theme '" theme "'...")
+	(with-temp-message (concat "Loading theme '" (symbol-name theme) "'...")
 		      (load-theme theme))
 	(message "Loading theme '%s'...done." theme)
 	(setq fg/current-theme theme))))
