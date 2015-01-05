@@ -1,17 +1,88 @@
 (defaddon appearance
   "Appearance enhancements and theme interactions."
-  (defvar fg/default-theme 'tango-2-theme)
+  (setq custom-theme-directory theme-dir)
   
-  (defvar fg/theme-mode-package-alist '((tango-2-theme . tango-2-theme)
-					(solarized-theme . solarized-theme)
-					(zenburn-theme . zenburn-theme))
-    "Association list of (theme-function . theme-package) cons cells")
+  (defvar fg/default-theme 'afternoon
+    "Default theme to load at startup")
 
+  (defvar fg/theme-mode-package-alist '((afternoon . afternoon-theme)
+					(ample . ample-theme)
+					(ample-zen . ample-zen-theme)
+					(anti-zenburn . anti-zenburn-theme)
+					(assemblage . assemblage-theme)
+					(badger . badger-theme)
+					(base16-chalk . base16-theme)
+					(base16-default . base16-theme)
+					(base16-eighties . base16-theme)
+					(base16-greenscreen . base16-theme)
+					(base16-mocha . base16-theme)
+					(base16-monokai . base16-theme)
+					(base16-ocean . base16-theme)
+					(base16-railscasts . base16-theme)
+					(base16-solarized . base16-theme)
+					(base16-tomorrow . base16-theme)
+					(basic . basic-theme)
+					(birds-of-paradise . birds-of-paradise-theme)
+					(bliss . bliss-theme)
+					(boron . boron-theme)
+					(bubbleberry . bubbleberry-theme)
+					(busybee . busybee-theme)
+					(calmer-forest . calmer-forest-theme)
+					(cherry-blossom . cherry-blossom-theme)
+					(clues . clues-theme)
+					(colonoscopy . colonoscopy-theme)
+					(cyberpunk . cyberpunk-theme)
+					(tango-2 . tango-2-theme)
+					(solarized-dark . solarized-theme)
+					(solarized-light . solarized-theme)
+					(zenburn . zenburn-theme))
+    "Association list of (theme-name . theme-package) cons cells")
+
+  (defvar fg/blacklisted-themes-list '()
+    "Themes that should not be loaded for various reasons.")
+
+  (global-set-key (kbd "C-c n") 'fg/cycle-theme)
+  (global-set-key (kbd "C-c b") 'fg/blacklist-current-theme)
+  
+  (defun fg/available-themes ()
+    (delq nil (mapcar #'(lambda (x)
+		(if (member (car x) fg/blacklisted-themes-list)
+		    nil
+		  (car x)))
+		      fg/theme-mode-package-alist)))
+
+  (defun fg/blacklist-current-theme ()
+    (when fg/current-theme
+      (let ((old-theme fg/current-theme))
+	(fg/cycle-theme)
+	(add-to-list 'fg/blacklisted-themes-list old-theme))))
+  (defalias 'blacklist-current-theme 'fg/blacklist-current-theme)
+
+  (setq fg/current-theme nil)
+  
+  (defun fg/load-theme (theme)
+    (let ((theme-package (cdr (assoc theme fg/theme-mode-package-alist))))
+      (when theme-package
+	(fg/require-package theme-package)
+	(load-theme theme)
+	(setq fg/current-theme theme))))
+
+  (defun fg/cycle-theme ()
+    (interactive)
+    (let* ((current-theme-name (or fg/current-theme
+				   fg/default-theme))
+	   (current-theme (assoc current-theme-name fg/theme-mode-package-alist)))
+      (if current-theme
+	  (let* ((theme-pos (position current-theme fg/theme-mode-package-alist))
+		 (next-theme-pos (if (> (+ 2 theme-pos) (length fg/theme-mode-package-alist)) 0 (+ 1 theme-pos))))
+	    (message "next-theme: %s" next-theme-pos)
+	    (fg/load-theme (car (nth next-theme-pos fg/theme-mode-package-alist))))
+	(warn "Current theme was not found in the current theme alist."))))
+  (defalias 'cycle-theme 'fg/cycle-theme)
+  
   (when fg/default-theme
-    (unless (fboundp fg/default-theme)
-      (package-install (cdr (assoc fg/default-theme fg/theme-mode-package-alist))))
-    (fg/default-theme))
-
+    (fg/load-theme fg/default-theme))
+  
   (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
   (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
   (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
