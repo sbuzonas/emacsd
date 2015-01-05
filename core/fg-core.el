@@ -1,55 +1,33 @@
-(defun fg/add-to-load-path (this-directory &optional with-subdirs
-					   recursive)
-  "Add THID-DIRECTORY at the beginning of the `load-path', if it exists.
-Add all its subdirectories not starting with a '.' if the optional argument
-WITH-SUBDIRS is not nil.
-Do it recursively if the third argument is not nil."
-  (when (and this-directory
-	     (file-directory-p this-directory))
-    (let* ((this-directory (expand-file-name this-directory))
-	   (files (directory-files this-directory t "^[^\\.]")))
+;; turn on Common Lisp support
+(require 'cl)
 
-      ;; completely canonicalize the directory name (*may not* begin with '~')
-      (while (not (string= this-directory (expand-file-name this-directory)))
-	(setq this-directory (expand-file-name this-directory)))
+;; Functions / Macros
+(require 'fg-load)
+(require 'fg-string)
+(require 'fg-environment)
 
-      (when debug-on-error (message "Adding '%s' to `load-path'." this-directory))
-      (add-to-list 'load-path this-directory)
+;; Variable Initialization / Early Configuration Bootstrap
+(require 'fg-config)
+(message "* -- [ Loading settings managed by Custom ] --")
+(setq custom-file (expand-file-name "custom.el" load-emacs-dir)) ;; Dedicate a file for settings by Custom
+(when (file-exists-p custom-file)
+  (load custom-file))
+;; Now that custom has been loaded, get user defined variables
+(when (file-exists-p variables-file)
+  (load variables-file))
+(when (file-exists-p local-variables-file)
+  (load local-variables-file))
+(require 'fg-secrets)
 
-      (when with-subdirs
-	(while files
-	  (setq dir-or-file (car files))
-	  (when (file-directory-p dir-or-file)
-	    (unless recursive
-	      (setq with-subdirs nil))
-	    (fg/add-to-load-path dir-or-file with-subdirs recursive))
-	  (setq files (cdr files)))))))
+;; Load configuration
+(require 'fg-defaults)
+(when (file-exists-p config-dir)
+  (message "* -- [ Loading configuration files ] --")
+  (mapc 'load (directory-files config-dir 't "^[^#].*el$")))
 
-(defun fg/load-directory (directory)
-  "Load all `.el' files in DIRECTORY."
-  (dolist (element (directory-files-and-attributes directory nil nil nil))
-    (let* ((path (car element))
-	   (fullpath (concat directory "/" path))
-	   (isdir (car (cdr element)))
-	   (ignore-dir (or
-			(string= path ".")
-			(string= path ".."))))
-      (cond
-       ((and (eq isdir t) (not ignore-dir))
-	(fg/load-directory fullpath))
-       ((and (eq isdir nil) (string= (substring path -3) ".el"))
-	(load (file-name-sans-extension fullpath)))))))
-
-(defun fg/string-starts-with (string prefix)
-  "Return t if STRING starts with PREFIX."
-  (and (string-match (rx-to-string `(: bos ,prefix) t)
-		     string)
-       t))
-
-(defun fg/string-ends-with (string suffix)
-  "Return t if STRING ends with SUFFIX."
-  (and (string-match (rx-to-string `(: ,suffix eos) t)
-		     string)
-       t))
+;; Extensions
+(require 'fg-packages)
+(require 'fg-modes)
+(require 'fg-addons)
 
 (provide 'fg-core)

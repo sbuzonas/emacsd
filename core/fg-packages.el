@@ -82,20 +82,16 @@ are installed and not in `fg/default-packages'."
 		  (mapcar 'car package-archive-contents))))
 
 (defun fg/auto-install-mode (orig-fun list-var item &optional append compare-fn)
-  (when debug-on-error (message "Advice called"))
   (unless append
     (setq append nil))
   (unless compare-fn
     (setq compare-fn nil))
   (when (eq 'auto-mode-alist list-var)
-    (when debug-on-error (message "Correct list"))
     (let ((pattern (car item))
 	  (callback (cdr item)))
-      (when debug-on-error (message "Pattern: %S; Callback: %S" pattern callback))
       (when (symbolp callback)
 	(let ((package (cdr (assoc callback fg/mode-auto-install-alist))))
 	  (when package
-	    (when debug-on-error (message "Package: %s" package))
 	    (setq item (cons pattern `(lambda ()
 					(unless (package-installed-p ',package)
 					  (package-install ',package))
@@ -132,7 +128,7 @@ are installed and not in `fg/default-packages'."
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(fg/bootstrap-mode-installers)
-(fg/install-packages)
+(add-hook 'after-init-hook 'fg/bootstrap-mode-installers)
+(add-hook 'after-init-hook 'fg/install-packages)
 
 (provide 'fg-packages)
