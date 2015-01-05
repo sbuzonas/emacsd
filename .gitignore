@@ -1,3 +1,5 @@
 # vendor is in a global ignore from chef and composer, unignore it
 !vendor
+.secrets.el.gpg
 custom.el
+local.el

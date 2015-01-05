@@ -14,11 +14,11 @@
   "The directory that is persistent between machines")
 
 ;; Define the names of the variable files
-(defvar variables-file (expand-file-name "variables.el" config-dir)
+(defvar defaults-file (expand-file-name "defaults.el" load-emacs-dir)
   "The file containing primary variable definitions")
-(defvar encrypted-variables-file (expand-file-name "secrets.el.gpg" config-dir)
-  "The file containing sensitive information such as passwords")
-(defvar local-variables-file (expand-file-name "local-variables.el" config-dir)
+(defvar local-defaults-file (expand-file-name "local.el" load-emacs-dir)
   "The file containing primary variable definitions for the local machine")
+(defvar encrypted-variables-file (expand-file-name ".secrets.el.gpg" load-emacs-dir)
+  "The file containing sensitive information such as passwords")
 
 (provide 'fg-config)

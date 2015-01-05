@@ -13,10 +13,10 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 ;; Now that custom has been loaded, get user defined variables
-(when (file-exists-p variables-file)
-  (load variables-file))
-(when (file-exists-p local-variables-file)
-  (load local-variables-file))
+(when (file-exists-p defaults-file)
+  (load defaults-file))
+(when (file-exists-p local-defaults-file)
+  (load local-defaults-file))
 (require 'fg-secrets)
 
 ;; Load configuration
