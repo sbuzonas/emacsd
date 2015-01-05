@@ -2,9 +2,6 @@
 (unless (file-exists-p backup-dir)
   (make-directory backup-dir))
 
-;; We should have enough information to set up the load path now
-(fg/add-to-load-path vendor-dir t t)
-
 ;; Auto refresh buffers
 (global-auto-revert-mode 1)
 

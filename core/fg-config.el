@@ -8,10 +8,31 @@
   "The directory with extensible functionality to toggle on and off.")
 (defvar backup-dir (expand-file-name "backup" load-emacs-dir)
   "The directory to store backups and autosaves")
-(defvar vendor-dir (expand-file-name "vendor" load-emacs-dir)
-  "The directory where 3rd party elisp code is stored")
 (defvar shared-dir (expand-file-name "shared" load-emacs-dir)
   "The directory that is persistent between machines")
+
+(defgroup libraries nil
+  "Settings changing load paths"
+  :group 'emacs)
+
+(defcustom distro-lisp-dir
+  (concat (or (getenv "SHARE")
+	      "/usr/share") "/emacs/site-lisp/")
+  "Path to distro emacs lisp files"
+  :type 'string
+  :group 'libraries)
+
+(defcustom site-lisp-dir
+  (concat (or (getenv "LOCAL_SHARE")
+	      "/usr/local/share") "/emacs/site-lisp/")
+  "Path to site emacs lisp files"
+  :type 'string
+  :group 'libraries)
+
+(defcustom vendor-dir (expand-file-name "vendor" load-emacs-dir)
+  "The directory where 3rd party elisp code is stored"
+  :type 'string
+  :group 'libraries)
 
 ;; Define the names of the variable files
 (defvar defaults-file (expand-file-name "defaults.el" load-emacs-dir)
@@ -20,6 +41,9 @@
   "The file containing primary variable definitions for the local machine")
 (defvar encrypted-variables-file (expand-file-name ".secrets.el.gpg" load-emacs-dir)
   "The file containing sensitive information such as passwords")
+
+(defvar fg/pandora-at-startup nil
+  "A non nil value will start pianobar and connecto to pandora on startup.")
 
 (defvar fg/default-theme nil
   "Default theme to load at startup. If nil load a random theme that isn't blacklisted.")

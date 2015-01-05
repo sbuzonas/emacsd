@@ -5,6 +5,10 @@
 (require 'fg-load)
 (require 'fg-string)
 (require 'fg-environment)
+(require 'fg-packages)
+(MacOSX
+ (fg/require-package 'exec-path-from-shell)
+ (exec-path-from-shell-initialize))
 
 ;; Variable Initialization / Early Configuration Bootstrap
 (require 'fg-config)
@@ -19,6 +23,14 @@
   (load local-defaults-file))
 (require 'fg-secrets)
 
+;; Add lisp directories to load path
+(when (file-exists-p vendor-dir)
+  (fg/add-to-load-path vendor-dir t t))
+(when (file-exists-p site-lisp-dir)
+  (fg/add-to-load-path site-lisp-dir t t))
+(when (file-exists-p distro-lisp-dir)
+  (fg/add-to-load-path distro-lisp-dir t t))
+
 ;; Load configuration
 (require 'fg-defaults)
 (when (file-exists-p config-dir)
@@ -26,7 +38,6 @@
   (mapc 'load (directory-files config-dir 't "^[^#].*el$")))
 
 ;; Extensions
-(require 'fg-packages)
 (require 'fg-modes)
 (require 'fg-addons)
 
