@@ -9,7 +9,7 @@
     (message "* %#.3f -- [ Loading %s ] --" (time-to-seconds (time-since emacs-load-start-time)) the-lib)))
 (advice-add 'load :before #'profile-load)
 
-(defun start-load-profiler ()
+(defun stop-load-profiler ()
   (advice-remove 'load 'profile-load)
   (message "Emacs startup time: %d seconds."
 	   (time-to-seconds (time-since emacs-load-start-time))))
