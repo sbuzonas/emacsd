@@ -46,6 +46,10 @@
 (when (file-exists-p custom-file)
   (load custom-file))
 
+;; Get the primary set of functions
+(add-to-list 'load-path core-dir)
+(require 'fg-core)
+
 ;; Now that custom has been loaded, get user defined variables
 (when (file-exists-p variables-file)
   (load variables-file))
@@ -62,8 +66,6 @@
   (make-directory backup-dir))
 
 ;; We should have enough information to set up the load path now
-(add-to-list 'load-path core-dir)
-(require 'fg-core)
 (fg/add-to-load-path vendor-dir t t)
 
 (require 'fg-secrets)
