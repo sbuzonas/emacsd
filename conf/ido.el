@@ -1,0 +1,7 @@
+(setq ido-enable-prefix nil)
+(setq ido-enable-flex-matching t)
+(setq ido-case-fold nil)
+(setq ido-auto-merge-work-directories-length -1)
+(setq ido-create-new-buffer 'always)
+(setq ido-use-filename-at-point nil)
+(setq ido-max-prospects 10)
