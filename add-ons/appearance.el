@@ -1,46 +1,8 @@
 (defaddon appearance
   "Appearance enhancements and theme interactions."
   (setq custom-theme-directory theme-dir)
-  
-  (defvar fg/default-theme 'afternoon
-    "Default theme to load at startup")
 
-  (defvar fg/theme-mode-package-alist '((afternoon . afternoon-theme)
-					(ample . ample-theme)
-					(ample-zen . ample-zen-theme)
-					(anti-zenburn . anti-zenburn-theme)
-					(assemblage . assemblage-theme)
-					(badger . badger-theme)
-					(base16-chalk . base16-theme)
-					(base16-default . base16-theme)
-					(base16-eighties . base16-theme)
-					(base16-greenscreen . base16-theme)
-					(base16-mocha . base16-theme)
-					(base16-monokai . base16-theme)
-					(base16-ocean . base16-theme)
-					(base16-railscasts . base16-theme)
-					(base16-solarized . base16-theme)
-					(base16-tomorrow . base16-theme)
-					(basic . basic-theme)
-					(bliss . bliss-theme)
-					(boron . boron-theme)
-					(bubbleberry . bubbleberry-theme)
-					(busybee . busybee-theme)
-					(calmer-forest . calmer-forest-theme)
-					(cherry-blossom . cherry-blossom-theme)
-					(clues . clues-theme)
-					(colonoscopy . colonoscopy-theme)
-					(cyberpunk . cyberpunk-theme)
-					(tango-2 . tango-2-theme)
-					(solarized-dark . solarized-theme)
-					(solarized-light . solarized-theme)
-					(zenburn . zenburn-theme))
-    "Association list of (theme-name . theme-package) cons cells")
 
-  (add-to-list 'fg/theme-mode-package-alist '(birds-of-paradise-plus . birds-of-paradise-plus-theme))
-
-  (defvar fg/blacklisted-themes-list '()
-    "Themes that should not be loaded for various reasons.")
   
   (global-set-key (kbd "C-c n") 'fg/cycle-theme)
   (global-set-key (kbd "C-c b") 'fg/blacklist-current-theme)
