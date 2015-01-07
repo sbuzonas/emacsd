@@ -1,6 +1,6 @@
 (setq terminal-theme (getenv "ITERM_THEME"))
 
-(setq fg/default-theme 'calmer-forest)
+(setq fg/default-theme 'mustard)
 
 (setq solarized-dark-blacklisted-themes '(anti-zenburn base16-greenscreen base16-mocha base16-monokai base16-ocean base16-railscasts base16-solarized basic birds-of-paradise-plus brin cherry-blossom colonoscopy dark-krystal django espresso flatui fogus gandalf graham granger heroku hipster inkpot ir-black lavender leuven light-soap mccarthy mellow obsidian occidental odersky oldlace organic-green phoenix-dark-pink planet professional ritchie soft-morning soft-stone solarized-dark solarized-light soothe stekene-light subatomic sunny-day tango-plus))
 (setq solarized-light-blacklisted-themes '())
