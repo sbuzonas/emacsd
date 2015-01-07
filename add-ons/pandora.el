@@ -6,7 +6,8 @@
     "Pandora radio interface."
     (autoload 'pianobar "pianobar" nil t)
 
-    (global-set-key (kbd "<f9>") 'pianobar-play-or-pause)
+    (global-set-key (kbd "<f8>") 'pianobar-play-or-pause)
+    (global-set-key (kbd "<f9>") 'pianobar-next-song)
     
     (defun fg/start-pianobar ()
       (pianobar))
