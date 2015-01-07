@@ -21,7 +21,9 @@
   (load defaults-file))
 (when (file-exists-p local-defaults-file)
   (load local-defaults-file))
-(require 'fg-secrets)
+
+(defun fg/load-secrets ()
+  (require 'fg-secrets))
 
 ;; Add lisp directories to load path
 (when (file-exists-p vendor-dir)

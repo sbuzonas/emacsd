@@ -1,8 +1,6 @@
 (setq terminal-theme (getenv "ITERM_THEME"))
 
-<<<<<<< Updated upstream
 (setq fg/default-theme 'mustard)
-=======
 ;(setq fg/default-theme 'calmer-forest)
 
 (setq solarized-dark-blacklisted-themes '(anti-zenburn
@@ -52,7 +50,6 @@
 					  subatomic
 					  sunny-day
 					  tango-plus))
->>>>>>> Stashed changes
 
 (setq solarized-light-blacklisted-themes '())
 (setq tango-dark-blacklisted-themes '())
