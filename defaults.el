@@ -9,3 +9,5 @@
 	  user-website "http://www.carnegielearning.com")
   (setq user-mail-address "steve@fancyguy.com"
 	user-website "http://www.stevebuzonas.com"))
+
+(setq auto-insert-copyright (concat user-full-name " <" user-mail-address ">"))
