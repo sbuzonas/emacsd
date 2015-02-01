@@ -1,6 +1,6 @@
 (defun fg/add-to-load-path (this-directory &optional with-subdirs
 					   recursive)
-  "Add THID-DIRECTORY at the beginning of the `load-path', if it exists.
+  "Add THIS-DIRECTORY at the beginning of the `load-path', if it exists.
 Add all its subdirectories not starting with a '.' if the optional argument
 WITH-SUBDIRS is not nil.
 Do it recursively if the third argument is not nil."
