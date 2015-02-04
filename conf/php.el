@@ -1,8 +1,8 @@
 (defun load-php-settings ()
-  (setq indent-tabs-mode t)
-  (setq tab-stop-list (number-sequence (3 210 3)))
+  (setq indent-tabs-mode nil)
+  (setq tab-stop-list (number-sequence '(4 210 4)))
   (setq tab-width 4)
-  (setq indent-line-function 'insert-tab)
+  (setq indent-line-function 'c-indent-line)
   (c-set-offset 'case-label '+))
 
 (defun php-define-tempo-templates ()
