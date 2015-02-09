@@ -10,16 +10,22 @@
        '("\\.php\\'" . "PHP Application")
        '(nil
 	 "<?php\n"
-	 "/**\n"
-	 `(when (and project-name
-		     (not (string= "" project-name)))
-	    (concat " * This file is part of " project-name ".\n *\n"))
-	 `(when (and auto-insert-copyright
-		     (not (string= "" auto-insert-copyright)))
-	    (concat " * Copyright (c) " (substring (current-time-string) -4) " " auto-insert-copyright "\n *\n"))
-	 " * For the full copyright and license information, please view the LICENSE\n"
-	 " * file that was distributed with this source code.\n"
-	 " */\n\n"
+	 ;; Insert the license when we don't have an `insert-license' preference or it is non nil
+	 `(when (or (not (boundp 'insert-license))
+		    insert-license)
+	    "/**\n"
+	    ;; Insert the `project-name' if we have it
+	    `(when (and project-name
+			(not (string= "" project-name)))
+	       (concat " * This file is part of " project-name ".\n *\n"))
+	    ;; If we have `auto-insert-copyright' set put it in the header
+	    `(when (and auto-insert-copyright
+			(not (string= "" auto-insert-copyright)))
+	       (concat " * Copyright (c) " (substring (current-time-string) -4) " " auto-insert-copyright "\n *\n"))
+	    " * For the full copyright and license information, please view the LICENSE\n"
+	    " * file that was distributed with this source code.\n"
+	    " */\n"
+	    "\n")
 	 `(when (not (string= "" (fg/assume-namespace-from-path)))
 	    (concat "namespace " (fg/assume-namespace-from-path) ";\n\n"))
 	 "class " (file-name-sans-extension (file-name-nondirectory (buffer-file-name))) "\n"
