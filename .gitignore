@@ -5,3 +5,4 @@ recentf
 .secrets.el.gpg
 custom.el
 local.el
+elpa/
