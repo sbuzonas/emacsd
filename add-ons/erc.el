@@ -26,7 +26,8 @@
   (erc-spelling-mode)
 
   ;; TODO: Discover why this is an alist
-  (defvar erc-autojoin-channels-alist '(("##php"))
+  (defvar erc-autojoin-channels-alist '((".*" "#emacs")
+					("freenode.net" "##php" "#composer"))
     "Alist of channels to join automatically")
   (defvar erc-notify-nick-alist nil
     "Alist of nicks and the last time they tried to trigger a notification")
