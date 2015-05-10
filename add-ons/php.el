@@ -4,7 +4,12 @@
 
   (defvar php-tempo-tags nil
     "Tempo tags for PHP mode")
-  
+
+  (after php
+    (define-key php-mode-map [(control ?c) ?t] 'phpunit-current-test)
+    (define-key php-mode-map [(control ?c) ?c] 'phpunit-current-class)
+    (define-key php-mode-map [(control ?c) ?p] 'phpunit-current-project))
+
   (eval-after-load 'autoinsert
     '(define-auto-insert
        '("\\.php\\'" . "PHP Application")

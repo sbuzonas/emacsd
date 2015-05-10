@@ -1,6 +1,6 @@
 (defaddon programming
   "Provides generic extensions for programming modes."
-  (fg/require-packages '(smartparens flycheck))
+  (fg/require-packages '(smart-tabs-mode smartparens flycheck))
   (defun fg/font-lock-annotations ()
     (font-lock-add-keywords
      nil '(("\\<\\(\\(FIX\\(ME\\)?\\|TODO\\|OPTIMIZE\\|HACK\\|REFACTOR\\):\\)"
@@ -17,6 +17,7 @@
     "Programming mode defaults"
     (require 'which-func)
     (fg/font-lock-lambda)
+    (smart-tabs-mode)
     (which-function-mode t)
     (fg/font-lock-annotations))
 
