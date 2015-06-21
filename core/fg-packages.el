@@ -101,7 +101,8 @@ are installed and not in `fg/default-packages'."
 
 
   (apply orig-fun list-var item append compare-fn))
-(advice-add 'add-to-list :around #'fg/auto-install-mode)
+(when (fboundp 'advice-add)
+  (advice-add 'add-to-list :around #'fg/auto-install-mode))
 
 (setq fg/mode-autoloads-initialized nil)
 

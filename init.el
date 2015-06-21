@@ -7,10 +7,12 @@
 (defun profile-load (the-lib &rest args)
   (when (and the-lib debug-on-error)
     (message "* %#.3f -- [ Loading %s ] --" (time-to-seconds (time-since emacs-load-start-time)) the-lib)))
-(advice-add 'load :before #'profile-load)
+(when (fboundp 'advice-add)
+  (advice-add 'load :before #'profile-load))
 
 (defun stop-load-profiler ()
-  (advice-remove 'load 'profile-load)
+  (when (fboundp 'advice-remove)
+    (advice-remove 'load 'profile-load))
   (message "Emacs startup time: %d seconds."
 	   (time-to-seconds (time-since emacs-load-start-time))))
 
