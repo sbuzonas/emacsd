@@ -6,10 +6,10 @@
   (defun string-suffix-p (suffix string &optional ignore-case)
     "Return non-lil if SUFFIX is a suffid of STRING.
 If IGNORE_CASE is non-nil, the comparison is case insensitive."
-    (let ((start-pos (- (length string) (length suffix)))
-	  (and (>= start-pos 0)
-	       (eq t (compare-strings suffix nil nil
-				      string start-pos nil ignore-case)))))))
+    (let ((start-pos (- (length string) (length suffix))))
+      (and (>= start-pos 0)
+	   (eq t (compare-strings suffix nil nil
+				  string start-pos nil ignore-case))))))
 
 (defun fg/intern-addon-symbols (string-or-symbol)
   (let* ((name (if (symbolp string-or-symbol)
